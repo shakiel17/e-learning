@@ -27,6 +27,7 @@ CREATE TABLE `assignment` (
   `lesson_id` varchar(45) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   `document` longblob,
+  `datearray` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -155,6 +156,7 @@ CREATE TABLE `lessons` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` varchar(100) DEFAULT NULL,
   `quarter` varchar(45) DEFAULT NULL,
+  `datearray` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -204,6 +206,7 @@ CREATE TABLE `quizzes` (
   `lesson_id` varchar(45) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   `document` longblob,
+  `datearray` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -259,10 +262,11 @@ CREATE TABLE `student` (
   `student_gender` varchar(45) DEFAULT NULL,
   `username` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
+  `datearray` date DEFAULT NULL,
   `date_login` date DEFAULT NULL,
   `time_login` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,6 +275,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES (1,'25-1234','Aboy','Eczekiel','Hermocilla','male',NULL,NULL,NULL,NULL,NULL),(2,'25-4232','Aboy','Czesha Arendelle','Villoga','female',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +295,7 @@ CREATE TABLE `users` (
   `date_login` date DEFAULT NULL,
   `time_login` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,6 +304,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Administrator','admin','1234','admin','2025-08-05','13:38:32'),(4,'Eczekiel Aboy','shakiel17','1234','teacher',NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -311,4 +317,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-04  8:39:56
+-- Dump completed on 2025-08-05 13:40:42
