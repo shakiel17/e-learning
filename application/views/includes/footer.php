@@ -1,0 +1,82 @@
+
+<script src="<?=base_url('design/bower_components/bootstrap/dist/js/bootstrap.min.js');?>"></script>
+
+<!-- library for cookie management -->
+<script src="<?=base_url('design/js/jquery.cookie.js');?>"></script>
+<!-- calender plugin -->
+<script src='<?=base_url('design/bower_components/moment/min/moment.min.js');?>'></script>
+<script src='<?=base_url('design/bower_components/fullcalendar/dist/fullcalendar.min.js');?>'></script>
+<!-- data table plugin -->
+<script src='<?=base_url('design/js/jquery.dataTables.min.js');?>'></script>
+
+<!-- select or dropdown enhancer -->
+<script src="<?=base_url('design/bower_components/chosen/chosen.jquery.min.js');?>"></script>
+<!-- plugin for gallery image view -->
+<script src="<?=base_url('design/bower_components/colorbox/jquery.colorbox-min.js');?>"></script>
+<!-- notification plugin -->
+<script src="<?=base_url('design/js/jquery.noty.js');?>"></script>
+<!-- library for making tables responsive -->
+<script src="<?=base_url('design/bower_components/responsive-tables/responsive-tables.js');?>"></script>
+<!-- tour plugin -->
+<script src="<?=base_url('design/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js');?>"></script>
+<!-- star rating plugin -->
+<script src="<?=base_url('design/js/jquery.raty.min.js');?>"></script>
+<!-- for iOS style toggle switch -->
+<script src="<?=base_url('design/js/jquery.iphone.toggle.js');?>"></script>
+<!-- autogrowing textarea plugin -->
+<script src="<?=base_url('design/js/jquery.autogrow-textarea.js');?>"></script>
+<!-- multiple file upload plugin -->
+<script src="<?=base_url('design/js/jquery.uploadify-3.1.min.js');?>"></script>
+<!-- history.js for cross-browser state change on ajax -->
+<script src="<?=base_url('design/js/jquery.history.js');?>"></script>
+<!-- application script for Charisma demo -->
+<script src="<?=base_url('design/js/charisma.js');?>"></script>
+
+<script>
+    $('.addUser').click(function(){
+        document.getElementById('user_id').value='';
+        document.getElementById('user_fullname').value='';
+        document.getElementById('user_name').value='';
+        document.getElementById('user_password').value='';
+        document.getElementById('user_teacher').checked = true;
+    });
+    $('.editUser').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('user_id').value=id[0];
+        document.getElementById('user_fullname').value=id[1];
+        document.getElementById('user_name').value=id[2];
+        document.getElementById('user_password').value=id[3];
+        if(id[4]=="teacher"){
+            document.getElementById('user_teacher').checked = true;
+        }else{
+            document.getElementById('user_admin').checked = true;
+        }
+    });
+
+    $('.addStudent').click(function(){
+        document.getElementById('student_id').value='';
+        document.getElementById('stud_id').value='';
+        document.getElementById('stud_lastname').value='';
+        document.getElementById('stud_firstname').value='';
+        document.getElementById('stud_middlename').value='';
+        document.getElementById('stud_male').checked = true;
+    });
+    $('.editStudent').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');        
+        document.getElementById('student_id').value=id[0];
+        document.getElementById('stud_id').value=id[1];
+        document.getElementById('stud_lastname').value=id[2];
+        document.getElementById('stud_firstname').value=id[3];
+        document.getElementById('stud_middlename').value=id[4];     
+        if(id[5]=="male"){
+            document.getElementById('stud_male').checked = true;
+        }else{
+            document.getElementById('stud_female').checked = true;
+        }
+    });
+</script>
+
+</body>
+</html>
