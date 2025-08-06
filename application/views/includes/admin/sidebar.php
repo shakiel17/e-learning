@@ -17,7 +17,7 @@
                         <!-- <li><a class="ajax-link" href="<?=base_url('manage_teacher');?>"><i class="glyphicon glyphicon-user"></i><span> Teacher</span></a></li> -->
                         <li><a class="ajax-link" href="<?=base_url('manage_users');?>"><i class="glyphicon glyphicon-user"></i><span> Users</span></a>
                         </li>
-                        <li><a class="ajax-link" href="<?=base_url('manage_lessons');?>"><i class="glyphicon glyphicon-font"></i><span> Lessons</span></a>
+                        <li><a class="ajax-link" href="<?=base_url('lesson_list');?>"><i class="glyphicon glyphicon-font"></i><span> Lessons</span></a>
                         </li>                        
                     </ul>                    
                 </div>

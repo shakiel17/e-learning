@@ -76,6 +76,37 @@
             document.getElementById('stud_female').checked = true;
         }
     });
+    $('.addLesson').click(function(){
+        document.getElementById('lesson_id').value='';
+        document.getElementById('lesson_description').value='';
+        document.getElementById('lesson_quarter').value='';
+    });
+    $('.editLesson').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('lesson_id').value=id[0];
+        document.getElementById('lesson_description').value=id[1];
+        document.getElementById('lesson_quarter').value=id[2];
+    });
+    $('.addTopic').click(function(){
+        var id=$(this).data('id');
+        document.getElementById('topic_id').value='';
+        document.getElementById('topic_description').value='';        
+        document.getElementById('topic_lesson_id').value=id;
+    });
+    $('.editTopic').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('topic_id').value=id[0];
+        document.getElementById('topic_description').value=id[1];        
+        document.getElementById('topic_lesson_id').value=id[2];
+    });
+    $('.topicAttach').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('topic_attach_id').value=id[0];        
+        document.getElementById('topic_attach_lesson_id').value=id[1];
+    });
 </script>
 
 </body>

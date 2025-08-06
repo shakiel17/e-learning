@@ -20,7 +20,7 @@
             return $result->result_array();
         }
         public function getAllLesson(){
-            $result=$this->db->query("SELECT * FROM lessons ORDER BY `quarter` ASC, `description` ASC");
+            $result=$this->db->query("SELECT * FROM lessons ORDER BY `quarter` ASC, id ASC");
             return $result->result_array();
         }
         public function getAllAssignment(){
@@ -114,6 +114,95 @@
                 }else{
                     return false;
                 }
+            }
+        }
+
+        public function teacher_authenticate($username,$password){
+            $result=$this->db->query("SELECT * FROM users WHERE username='$username' AND `password`='$password' AND `role`='teacher'");
+            if($result->num_rows()>0){
+                $date=date('Y-m-d');
+                $time=date('H:i:s');
+                $this->db->query("UPDATE users SET date_login='$date',time_login='$time' WHERE username='$username'");                
+                return $result->row_array();
+            }else{
+                return false;
+            }
+        }
+        public function save_lessons(){
+            $id=$this->input->post('id');
+            $description=$this->input->post('description');
+            $quarter=$this->input->post('quarter');
+            $date=date('Y-m-d');
+            if($id==""){
+                $result=$this->db->query("INSERT INTO lessons(`description`,`quarter`,datearray) VALUES('$description','$quarter','$date')");
+            }else{
+                $result=$this->db->query("UPDATE lessons SET `description`='$description',`quarter`='$quarter' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getAllQuizzesByLesson($id){
+            $result=$this->db->query("SELECT l.description,q.* FROM quizzes q INNER JOIN lessons l ON l.id=q.lesson_id WHERE l.id='$id' ORDER BY q.datearray ASC");
+            return $result->result_array();
+        }
+        public function getAllAssignmentsByLesson($id){
+            $result=$this->db->query("SELECT l.description,q.* FROM assignment q INNER JOIN lessons l ON l.id=q.lesson_id WHERE l.id='$id' ORDER BY q.datearray ASC");
+            return $result->result_array();
+        }
+        public function getAllTask($id){
+            $result=$this->db->query("SELECT l.description as lesson,q.* FROM lessons_details q INNER JOIN lessons l ON l.id=q.lesson_id WHERE l.id='$id' ORDER BY q.datearray ASC");
+            return $result->result_array();
+        }
+        public function getSingleLesson($id){
+            $result=$this->db->query("SELECT * FROM lessons WHERE id='$id'");
+            return $result->row_array();
+        }
+        public function save_topic(){
+            $id=$this->input->post('id');
+            $lesson_id=$this->input->post('lesson_id');
+            $description=$this->input->post('description');            
+            $date=date('Y-m-d');
+            if($id==""){
+                $result=$this->db->query("INSERT INTO lessons_details(`description`,lesson_id,datearray) VALUES('$description','$lesson_id','$date')");
+            }else{
+                $result=$this->db->query("UPDATE lessons_details SET `description`='$description' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function save_topic_attachment(){
+            $id=$this->input->post('id');
+            $lesson_id=$this->input->post('lesson_id');
+            $fileName=basename($_FILES["file"]["name"]);
+            $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
+            $allowTypes = array('pdf');
+            if(in_array($fileType,$allowTypes)){
+                $image = $_FILES["file"]["tmp_name"];
+                $imgContent=addslashes(file_get_contents($image));
+                $result=$this->db->query("UPDATE lessons_details SET document='$imgContent' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getSingleTopic($id){
+            $result=$this->db->query("SELECT * FROM lessons_details WHERE id='$id'");
+            return $result->row_array();
+        }
+        public function remove_topic_attachment($id){
+            $result=$this->db->query("UPDATE lessons_details SET document='' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
             }
         }
     }

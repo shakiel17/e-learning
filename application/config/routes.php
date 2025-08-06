@@ -62,7 +62,18 @@ $route['adminmain'] = 'pages/adminmain';
 $route['admin_authenticate'] = 'pages/admin_authenticate';
 $route['admin'] = 'pages/admin';
 //=====================Teacher Route========================
-
+$route['remove_topic_attachment/(:any)/(:any)'] = 'pages/remove_topic_attachment/$1/$2';
+$route['view_topic/(:any)'] = 'pages/view_topic/$1';
+$route['save_topic_attachment'] = 'pages/save_topic_attachment';
+$route['save_topic'] = 'pages/save_topic';
+$route['manage_topics/(:any)'] = 'pages/manage_topics/$1';
+$route['save_lessons'] = 'pages/save_lessons';
+$route['manage_lessons'] = 'pages/manage_lessons';
+$route['student_list'] = 'pages/student_list';
+$route['teacherlogout'] = 'pages/teacherlogout';
+$route['teachermain'] = 'pages/teachermain';
+$route['teacher_authenticate'] = 'pages/teacher_authenticate';
+$route['teacher'] = 'pages/teacher';
 //=====================User Route===========================
 $route['main'] = 'pages/main';
 $route['logout'] = 'pages/logout';
