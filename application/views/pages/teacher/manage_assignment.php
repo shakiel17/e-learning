@@ -9,7 +9,10 @@
             <a href="<?=base_url('manage_lessons');?>">Lesson Manager</a>
         </li>
         <li>
-            Topic Manager (<b><?=$lesson['description'];?></b>)
+            <a href="<?=base_url('manage_topics/'.$lesson['id']);?>">Topic Manager (<b><?=$lesson['description'];?></b>)</a>
+        </li>
+        <li>
+            Assignment Manager (<?=$topic['description'];?>)
         </li>
     </ul>
 </div>
@@ -25,10 +28,10 @@ if($this->session->flashdata('failed')){
     <div class="box col-md-12">
         <div class="box-inner">
             <div class="box-header well">
-                <h2><i class="glyphicon glyphicon-book"></i> Topic List</h2>
+                <h2><i class="glyphicon glyphicon-book"></i> Assignment List</h2>
 
                 <div class="box-icon">
-                    <a href="#" class="btn btn-round btn-default addTopic" title="Add New Topic" data-toggle="modal" data-target="#ManageTopic" data-id="<?=$lesson['id'];?>"><i
+                    <a href="#" class="btn btn-round btn-default addAssignment" title="Add New Assignment" data-toggle="modal" data-target="#ManageAssignment" data-id="<?=$topic['id'];?>_<?=$lesson['id'];?>"><i
                             class="glyphicon glyphicon-plus"></i></a>                    
                 </div>
             </div>
@@ -38,9 +41,7 @@ if($this->session->flashdata('failed')){
                     <tr>   
                         <th>No.</th>                     
                         <th>Description</th>
-                        <th>Attachment</th>
-                        <th>Assignment</th>
-                        <th>Quizzes</th>
+                        <th>Attachment</th>                        
                         <th>Status</th>
                         <th width="20%">Action</th>
                     </tr>
@@ -49,8 +50,6 @@ if($this->session->flashdata('failed')){
                         <?php
                         $x=1;
                         foreach($users as $item){ 
-                            $quiz=$this->Learning_model->getAllQuizzesByLesson($lesson['id'],$item['id']);
-                            $assign=$this->Learning_model->getAllAssignmentsByLesson($lesson['id'],$item['id']);
                             if($item['status']=="pending"){
                                 $post="";
                                 $unpost="style='display:none;'";
@@ -69,24 +68,22 @@ if($this->session->flashdata('failed')){
                                 $unpost="style='display:none;'";
                                 $complete="style='display:none;'";
                                 $view="";
-                                $upload = "<a href='#' class='btn btn-info btn-sm topicAttach' data-toggle='modal' data-target='#ManageTopicAttachment' data-id='$item[id]_$lesson[id]'>Add Attachment</a>";
+                                $upload = "<a href='#' class='btn btn-info btn-sm assignmentAttach' data-toggle='modal' data-target='#ManageAssignmentAttachment' data-id='$item[id]_$topic[id]_$lesson[id]'>Add Attachment</a>";
                             }else{
-                                $view="<a href='".base_url('view_topic/'.$item['id'])."' class='btn btn-primary btn-sm' target='_blank'><i class='glyphicon glyphicon-search'></i></a>";
-                                $upload = "<a href='".base_url('remove_topic_attachment/'.$item['id']."/".$lesson['id'])."' class='btn btn-danger btn-sm'>Remove Attachment</a>";
-                            }                            
+                                $view="<a href='".base_url('view_assignment/'.$item['id'])."' class='btn btn-primary btn-sm' target='_blank'><i class='glyphicon glyphicon-search'></i></a>";
+                                $upload = "<a href='".base_url('remove_assignment_attachment/'.$item['id']."/".$topic['id']."/".$lesson['id'])."' class='btn btn-danger btn-sm'>Remove Attachment</a>";
+                            }                                            
                             echo "<tr>";
                                 echo "<td>$x.</td>";
-                                echo "<td>$item[description]</td>";
-                                echo "<td>$upload $view</td>";
-                                 echo "<td align='center'><a href='".base_url('manage_assignment/'.$item['id']."/".$lesson['id'])."' class='btn btn-info btn-sm'>".count($assign)."</a></td>"; 
-                                echo "<td align='center'><a href='".base_url('manage_quiz/'.$item['id']."/".$lesson['id'])."' class='btn btn-info btn-sm'>".count($quiz)."</a></td>";
+                                echo "<td>$item[description]</td>";                                
+                                echo "<td align='center'>$upload $view</td>"; 
                                 echo "<td>$item[status]</td>";
                                 ?>
                                 <td>
-                                    <a href="#" class="btn btn-warning btn-sm editTopic" data-toggle="modal" data-target="#ManageTopic" data-id="<?=$item['id'];?>_<?=$item['description'];?>_<?=$lesson['id'];?>"><i class="glyphicon glyphicon-edit"></i> Edit</a>                                                                        
-                                    <a href="<?=base_url('update_topic_status/'.$item['id']."/".$lesson['id']."/posted");?>" class="btn btn-primary btn-sm" onclick="return confirm('Do you wish to post this topic?');return false;" <?=$post;?>><i class="glyphicon glyphicon-upload"></i> Post</a>
-                                    <a href="<?=base_url('update_topic_status/'.$item['id']."/".$lesson['id']."/pending");?>" class="btn btn-info btn-sm" onclick="return confirm('Do you wish to unpost this topic?');return false;" <?=$unpost;?>><i class="glyphicon glyphicon-download"></i> Unpost</a>
-                                    <a href="<?=base_url('update_topic_status/'.$item['id']."/".$lesson['id']."/completed");?>" class="btn btn-success btn-sm" onclick="return confirm('Do you wish to complete this topic?');return false;" <?=$complete;?>><i class="glyphicon glyphicon-thumbs-up"></i> Complete</a>                                    
+                                    <a href="#" class="btn btn-warning btn-sm editAssignment" data-toggle="modal" data-target="#ManageAssignment" data-id="<?=$item['id'];?>_<?=$topic['id'];?>_<?=$lesson['id'];?>_<?=$item['description'];?>"><i class="glyphicon glyphicon-edit"></i> Edit</a>                                    
+                                    <a href="<?=base_url('update_quiz_status/'.$item['id']."/".$topic['id']."/".$lesson['id']."/posted");?>" class="btn btn-primary btn-sm" onclick="return confirm('Do you wish to post this quiz?');return false;" <?=$post;?>><i class="glyphicon glyphicon-upload"></i> Post</a>
+                                    <a href="<?=base_url('update_quiz_status/'.$item['id']."/".$topic['id']."/".$lesson['id']."/pending");?>" class="btn btn-info btn-sm" onclick="return confirm('Do you wish to unpost this quiz?');return false;" <?=$unpost;?>><i class="glyphicon glyphicon-download"></i> Unpost</a>
+                                    <a href="<?=base_url('update_quiz_status/'.$item['id']."/".$topic['id']."/".$lesson['id']."/completed");?>" class="btn btn-success btn-sm" onclick="return confirm('Do you wish to complete this quiz?');return false;" <?=$complete;?>><i class="glyphicon glyphicon-thumbs-up"></i> Complete</a>
                                 </td>
                                 <?php
                             echo "</tr>";

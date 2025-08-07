@@ -10,9 +10,21 @@
   <body>
     <div class="bg-img">
       <div class="content">
-        <header>Student Portal</header>
-        <form action="<?=base_url('teacher_authenticate');?>" method="POST">
-          <div class="field">
+        <header>Registration</header>
+        <form action="<?=base_url('registration');?>" method="POST">          
+          <div class="field space">
+            <span class="fa fa-user"></span>
+            <input type="text" required placeholder="Student ID" name="student_id" autocomplete="off">
+          </div>
+          <div class="field space">
+            <span class="fa fa-user"></span>
+            <input type="text" required placeholder="Last Name" name="lastname" autocomplete="off">
+          </div>
+          <div class="field space">
+            <span class="fa fa-user"></span>
+            <input type="text" required placeholder="First Name" name="firstname" autocomplete="off">
+          </div>
+          <div class="field space">
             <span class="fa fa-user"></span>
             <input type="text" required placeholder="Username" name="username" autocomplete="off">
           </div>
@@ -29,12 +41,12 @@
             ?>
           </div>
           <div class="field">
-            <input type="submit" value="LOGIN">
+            <input type="submit" value="SIGNUP">
           </div>
-        </form>      
-        <br>  
-        <div class="signup">Don't have account?
-          <a href="<?=base_url('signup');?>">Signup Now</a>
+        </form>   
+        <br>     
+        <div class="signup">Member already?
+          <a href="<?=base_url();?>">Signin Now</a>
         </div>
       </div>
     </div>

@@ -205,5 +205,141 @@
                 return false;
             }
         }
+        public function update_topic_status($id,$status){
+            $result=$this->db->query("UPDATE lessons_details SET `status`='$status' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function update_lesson_status($id,$status){
+            $result=$this->db->query("UPDATE lessons SET `status`='$status' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getAllAssignmentByTask($id){
+            $result=$this->db->query("SELECT * FROM assignment WHERE topic_id='$id' ORDER BY datearray ASC,`description` ASC");
+            return $result->result_array();
+        }
+        public function save_assignment(){
+            $id=$this->input->post('id');
+            $topic_id=$this->input->post('topic_id');
+            $lesson_id=$this->input->post('lesson_id');
+            $description=$this->input->post('description');            
+            $date=date('Y-m-d');
+            if($id==""){
+                $result=$this->db->query("INSERT INTO assignment(`description`,lesson_id,topic_id,datearray) VALUES('$description','$lesson_id','$topic_id','$date')");
+            }else{
+                $result=$this->db->query("UPDATE assignment SET `description`='$description' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function save_assignment_attachment(){
+            $id=$this->input->post('id');
+            $topic_id=$this->input->post('topic_id');
+            $lesson_id=$this->input->post('lesson_id');
+            $fileName=basename($_FILES["file"]["name"]);
+            $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
+            $allowTypes = array('pdf');
+            if(in_array($fileType,$allowTypes)){
+                $image = $_FILES["file"]["tmp_name"];
+                $imgContent=addslashes(file_get_contents($image));
+                $result=$this->db->query("UPDATE assignment SET document='$imgContent' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getSingleAssignment($id){
+            $result=$this->db->query("SELECT * FROM assignment WHERE id='$id'");
+            return $result->row_array();
+        }
+        public function remove_assignment_attachment($id){
+            $result=$this->db->query("UPDATE assignment SET document='' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function update_assignment_status($id,$status){
+            $result=$this->db->query("UPDATE assignment SET `status`='$status' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function getAllQuizByTask($id){
+            $result=$this->db->query("SELECT * FROM quizzes WHERE topic_id='$id' ORDER BY datearray ASC,`description` ASC");
+            return $result->result_array();
+        }
+        public function save_quiz(){
+            $id=$this->input->post('id');
+            $topic_id=$this->input->post('topic_id');
+            $lesson_id=$this->input->post('lesson_id');
+            $description=$this->input->post('description');            
+            $date=date('Y-m-d');
+            if($id==""){
+                $result=$this->db->query("INSERT INTO quizzes(`description`,lesson_id,topic_id,datearray) VALUES('$description','$lesson_id','$topic_id','$date')");
+            }else{
+                $result=$this->db->query("UPDATE quizzes SET `description`='$description' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function save_quiz_attachment(){
+            $id=$this->input->post('id');
+            $topic_id=$this->input->post('topic_id');
+            $lesson_id=$this->input->post('lesson_id');
+            $fileName=basename($_FILES["file"]["name"]);
+            $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
+            $allowTypes = array('pdf');
+            if(in_array($fileType,$allowTypes)){
+                $image = $_FILES["file"]["tmp_name"];
+                $imgContent=addslashes(file_get_contents($image));
+                $result=$this->db->query("UPDATE quizzes SET document='$imgContent' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getSingleQuiz($id){
+            $result=$this->db->query("SELECT * FROM quizzes WHERE id='$id'");
+            return $result->row_array();
+        }
+        public function remove_quiz_attachment($id){
+            $result=$this->db->query("UPDATE quizzes SET document='' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function update_quiz_status($id,$status){
+            $result=$this->db->query("UPDATE quizzes SET `status`='$status' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

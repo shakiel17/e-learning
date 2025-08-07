@@ -99,3 +99,107 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="ManageAssignment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" action="<?=base_url('save_assignment');?>" method="POST">
+                <input type="hidden" name="id" id="assign_id">
+                <input type="hidden" name="topic_id" id="assign_topic_id">                
+                <input type="hidden" name="lesson_id" id="assign_lesson_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Add Assignment</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Description</label>
+                    <textarea name="description" rows="3" class="form-control" id="assign_description" required></textarea>
+                </div>                                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ManageAssignmentAttachment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" action="<?=base_url('save_assignment_attachment');?>" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" id="assign_attach_id">
+                <input type="hidden" name="lesson_id" id="assign_attach_lesson_id">
+                <input type="hidden" name="topic_id" id="assign_topic_attach_lesson_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Manage Assignment</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Upload Document</label>
+                    <input type="file" name="file" class="form-control" accept="application/pdf">
+                </div>                                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ManageQuiz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" action="<?=base_url('save_quiz');?>" method="POST">
+                <input type="hidden" name="id" id="quiz_id">
+                <input type="hidden" name="topic_id" id="quiz_topic_id">                
+                <input type="hidden" name="lesson_id" id="quiz_lesson_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Add Quiz</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Description</label>
+                    <textarea name="description" rows="3" class="form-control" id="quiz_description" required></textarea>
+                </div>                                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ManageQuizAttachment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" action="<?=base_url('save_quiz_attachment');?>" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" id="quiz_attach_id">
+                <input type="hidden" name="lesson_id" id="quiz_attach_lesson_id">
+                <input type="hidden" name="topic_id" id="quiz_topic_attach_lesson_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Manage Quiz</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Upload Document</label>
+                    <input type="file" name="file" class="form-control" accept="application/pdf">
+                </div>                                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

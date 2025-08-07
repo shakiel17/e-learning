@@ -54,6 +54,15 @@ date_default_timezone_set('Asia/Manila');
             $this->load->view('includes/modal');     
             $this->load->view('includes/footer');               
         } 
+        public function signup(){
+            $page = "signup";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->admin_login){redirect(base_url('main'));}
+            else{}
+            $this->load->view('pages/'.$page);                 
+        }
         //===============================User Module=========================================
 //====================================================================================================================================
         //===============================Teacher Module======================================
@@ -203,6 +212,162 @@ date_default_timezone_set('Asia/Manila');
                 $this->session->set_flashdata('failed','Unable to remove task attachment details!');
             }
             redirect(base_url('manage_topics/'.$lesson_id));
+        }
+        public function update_topic_status($id,$lesson_id,$status){            
+            $save=$this->Learning_model->update_topic_status($id,$status);
+            if($save){
+                $this->session->set_flashdata('success','Topic success '.$status."!");
+            }else{
+                $this->session->set_flashdata('failed','Unable to update topic status!');
+            }
+            redirect(base_url('manage_topics/'.$lesson_id));
+        }
+        public function update_lesson_status($id,$status){            
+            $save=$this->Learning_model->update_lesson_status($id,$status);
+            if($save){
+                $this->session->set_flashdata('success','Lesson success '.$status."!");
+            }else{
+                $this->session->set_flashdata('failed','Unable to update lesson status!');
+            }
+            redirect(base_url('manage_lessons'));
+        }
+        public function manage_assignment($id,$lesson_id){
+            $page = "manage_assignment";
+            if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->teacher_login){}
+            else{redirect(base_url('teacher'));}
+            $data['users'] = $this->Learning_model->getAllAssignmentByTask($id);  
+            $data['topic'] = $this->Learning_model->getSingleTopic($id);
+            $data['lesson'] = $this->Learning_model->getSingleLesson($lesson_id);            
+            $this->load->view('includes/header');
+            $this->load->view('includes/teacher/navbar');
+            $this->load->view('includes/teacher/sidebar');
+            $this->load->view('pages/teacher/'.$page,$data);
+            $this->load->view('includes/teacher/modal');
+            $this->load->view('includes/footer');
+        }
+
+        public function save_assignment(){
+            $id=$this->input->post('lesson_id');
+            $topic_id=$this->input->post('topic_id');
+            $save=$this->Learning_model->save_assignment();
+            if($save){
+                $this->session->set_flashdata('success','Assignment details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save assignment details!');
+            }
+            redirect(base_url('manage_assignment/'.$topic_id."/".$id));
+        }
+        public function save_assignment_attachment(){
+            $id=$this->input->post('lesson_id');
+            $topic_id=$this->input->post('topic_id');
+            $save=$this->Learning_model->save_assignment_attachment();
+            if($save){
+                $this->session->set_flashdata('success','Assignment attachment details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save assignment attachment details!');
+            }
+            redirect(base_url('manage_assignment/'.$topic_id."/".$id));
+        }
+        public function view_assignment($id){
+            $page = "view_topic";
+            if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->teacher_login){}
+            else{redirect(base_url('main'));}
+            $data['document'] = $this->Learning_model->getSingleAssignment($id);
+            $this->load->view('pages/teacher/'.$page,$data);                 
+        }
+        public function remove_assignment_attachment($id,$topic_id,$lesson_id){            
+            $save=$this->Learning_model->remove_assignment_attachment($id);
+            if($save){
+                $this->session->set_flashdata('success','Assignment attachment details successfully removed!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to remove assignment attachment details!');
+            }
+            redirect(base_url('manage_assignment/'.$topic_id."/".$lesson_id));
+        }
+
+        public function update_assignment_status($id,$topic_id,$lesson_id,$status){            
+            $save=$this->Learning_model->update_assignment_status($id,$status);
+            if($save){
+                $this->session->set_flashdata('success','Topic success '.$status."!");
+            }else{
+                $this->session->set_flashdata('failed','Unable to update topic status!');
+            }
+            redirect(base_url('manage_assignment/'.$topic_id."/".$lesson_id));
+        }
+
+        public function manage_quiz($id,$lesson_id){
+            $page = "manage_quiz";
+            if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->teacher_login){}
+            else{redirect(base_url('teacher'));}
+            $data['users'] = $this->Learning_model->getAllQuizByTask($id);  
+            $data['topic'] = $this->Learning_model->getSingleTopic($id);
+            $data['lesson'] = $this->Learning_model->getSingleLesson($lesson_id);            
+            $this->load->view('includes/header');
+            $this->load->view('includes/teacher/navbar');
+            $this->load->view('includes/teacher/sidebar');
+            $this->load->view('pages/teacher/'.$page,$data);
+            $this->load->view('includes/teacher/modal');
+            $this->load->view('includes/footer');
+        }
+
+        public function save_quiz(){
+            $id=$this->input->post('lesson_id');
+            $topic_id=$this->input->post('topic_id');
+            $save=$this->Learning_model->save_quiz();
+            if($save){
+                $this->session->set_flashdata('success','Quiz details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save quiz details!');
+            }
+            redirect(base_url('manage_quiz/'.$topic_id."/".$id));
+        }
+        public function save_quiz_attachment(){
+            $id=$this->input->post('lesson_id');
+            $topic_id=$this->input->post('topic_id');
+            $save=$this->Learning_model->save_quiz_attachment();
+            if($save){
+                $this->session->set_flashdata('success','Quiz attachment details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save quiz attachment details!');
+            }
+            redirect(base_url('manage_quiz/'.$topic_id."/".$id));
+        }
+        public function view_quiz($id){
+            $page = "view_topic";
+            if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->teacher_login){}
+            else{redirect(base_url('main'));}
+            $data['document'] = $this->Learning_model->getSingleQuiz($id);
+            $this->load->view('pages/teacher/'.$page,$data);                 
+        }
+        public function remove_quiz_attachment($id,$topic_id,$lesson_id){            
+            $save=$this->Learning_model->remove_quiz_attachment($id);
+            if($save){
+                $this->session->set_flashdata('success','Quiz attachment details successfully removed!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to remove quiz attachment details!');
+            }
+            redirect(base_url('manage_quiz/'.$topic_id."/".$lesson_id));
+        }
+        public function update_quiz_status($id,$topic_id,$lesson_id,$status){            
+            $save=$this->Learning_model->update_quiz_status($id,$status);
+            if($save){
+                $this->session->set_flashdata('success','Topic success '.$status."!");
+            }else{
+                $this->session->set_flashdata('failed','Unable to update topic status!');
+            }
+            redirect(base_url('manage_quiz/'.$topic_id."/".$lesson_id));
         }
         //===============================Teacher Module======================================
 //====================================================================================================================================

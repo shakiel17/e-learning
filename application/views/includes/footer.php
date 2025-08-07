@@ -107,6 +107,49 @@
         document.getElementById('topic_attach_id').value=id[0];        
         document.getElementById('topic_attach_lesson_id').value=id[1];
     });
+    $('.addAssignment').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('assign_topic_id').value=id[0];        
+        document.getElementById('assign_lesson_id').value=id[1];
+    });
+    $('.editAssignment').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('assign_id').value=id[0];        
+        document.getElementById('assign_topic_id').value=id[1];
+        document.getElementById('assign_lesson_id').value=id[2];
+        document.getElementById('assign_description').value=id[3];
+    });
+    $('.assignmentAttach').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('assign_attach_id').value=id[0];        
+        document.getElementById('assign_topic_attach_lesson_id').value=id[1];
+        document.getElementById('assign_attach_lesson_id').value=id[2];
+    });
+
+    $('.addQuiz').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('quiz_topic_id').value=id[0];        
+        document.getElementById('quiz_lesson_id').value=id[1];
+    });
+    $('.editQuiz').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('quiz_id').value=id[0];        
+        document.getElementById('quiz_topic_id').value=id[1];
+        document.getElementById('quiz_lesson_id').value=id[2];
+        document.getElementById('quiz_description').value=id[3];
+    });
+    $('.quizAttach').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('quiz_attach_id').value=id[0];        
+        document.getElementById('quiz_topic_attach_lesson_id').value=id[1];
+        document.getElementById('quiz_attach_lesson_id').value=id[2];
+    });
 </script>
 
 </body>
