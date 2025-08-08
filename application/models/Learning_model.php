@@ -341,5 +341,34 @@
                 return false;
             }
         }
+        public function registration(){
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
+            $student_id=$this->input->post('student_id');
+            $lastname=$this->input->post('lastname');
+            $firstname=$this->input->post('firstname');
+            $check=$this->db->query("SELECT * FROM student WHERE username='$username'");
+            if($check->num_rowS() > 0){
+                return false;
+            }else{
+                $result=$this->db->query("UPDATE student SET username='$username',`password`='$password',datearray='$date' WHERE student_id='$student_id'");
+                if($result){
+                    return true;
+                }else{
+                    return false;
+                }
+            }        
+        }
+        public function authenticate($username,$password){
+            $result=$this->db->query("SELECT * FROM student WHERE username='$username' AND `password`='$password'");
+            if($result->num_rows()>0){
+                $date=date('Y-m-d');
+                $time=date('H:i:s');
+                $this->db->query("UPDATE student SET date_login='$date',time_login='$time' WHERE username='$username'");                
+                return $result->row_array();
+            }else{
+                return false;
+            }
+        }
     }
 ?>

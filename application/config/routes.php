@@ -90,6 +90,8 @@ $route['teacher_authenticate'] = 'pages/teacher_authenticate';
 $route['teacher'] = 'pages/teacher';
 //=====================User Route===========================
 $route['main'] = 'pages/main';
+$route['student_authenticate'] = 'pages/student_authenticate';
+$route['registration'] = 'pages/registration';
 $route['signup'] = 'pages/signup';
 $route['logout'] = 'pages/logout';
 $route['authenticate'] = 'pages/authenticate';

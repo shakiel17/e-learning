@@ -11,7 +11,7 @@
     <div class="bg-img">
       <div class="content">
         <header>Student Portal</header>
-        <form action="<?=base_url('teacher_authenticate');?>" method="POST">
+        <form action="<?=base_url('authenticate');?>" method="POST">
           <div class="field">
             <span class="fa fa-user"></span>
             <input type="text" required placeholder="Username" name="username" autocomplete="off">

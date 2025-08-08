@@ -17,23 +17,26 @@ date_default_timezone_set('Asia/Manila');
         public function authenticate(){
             $username=$this->input->post('username');
             $password=$this->input->post('password');
-            $data=$this->Clinic_model->authenticate($username,$password);
+            $data=$this->Learning_model->authenticate($username,$password);
             if($data){
                 $userdata=array(
                     'username' => $username,
-                    'fullname' => $data['fullname'],
-                    'admin_login' => true
+                    'student_id' => $data['student_id'],
+                    'fullname' => $data['student_firstname']." ".$data['student_lastname'],
+                    'user_login' => true
                 );
                 $this->session->set_userdata($userdata);
                 redirect(base_url('main'));
             }else{
+                $this->session->set_flashdata('error','Invalid username and password!');
                 redirect(base_url());
             }
         }
         public function logout(){
             $this->session->unset_userdata('fullname');
             $this->session->unset_userdata('username');
-            $this->session->unset_userdata('admin_login');
+            $this->session->unset_userdata('student_id');
+            $this->session->unset_userdata('user_login');
             redirect(base_url());
         }
         public function main(){
@@ -41,12 +44,16 @@ date_default_timezone_set('Asia/Manila');
             if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
                 show_404();
             }                        
-            if($this->session->admin_login){}
+            if($this->session->user_login){}
             else{redirect(base_url());}
-            $data['services'] = $this->Clinic_model->getAllServices();
-            $data['patient'] = $this->Clinic_model->getAllPatient();
-            $data['admission'] = $this->Clinic_model->getAllAdmission();
-            $data['active_patient'] = $this->Clinic_model->getAllActivePatient();
+            $data['students'] = $this->Learning_model->getAllRegisteredStudent();
+            $data['lessons'] = $this->Learning_model->getAllLesson();
+            $data['assignments'] = $this->Learning_model->getAllAssignment();
+            $data['quizzes'] = $this->Learning_model->getAllQuizzes();
+            $data['newstudent'] = $this->Learning_model->getAllNewStudent(date('Y-m-d'));
+            $data['newlesson'] = $this->Learning_model->getAllNewLesson(date('Y-m-d'));
+            $data['newassignment'] = $this->Learning_model->getAllNewAssignment(date('Y-m-d'));
+            $data['newquizzes'] = $this->Learning_model->getAllNewQuizzes(date('Y-m-d'));
             $this->load->view('includes/header'); 
             $this->load->view('includes/navbar');           
             $this->load->view('includes/sidebar');            
@@ -62,6 +69,29 @@ date_default_timezone_set('Asia/Manila');
             if($this->session->admin_login){redirect(base_url('main'));}
             else{}
             $this->load->view('pages/'.$page);                 
+        }
+        public function registration(){
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
+            $register=$this->Learning_model->registration();
+            if($register){
+                $data=$this->Learning_model->authenticate($username,$password);
+                if($data){
+                    $userdata=array(
+                        'username' => $username,
+                        'student_id' => $data['student_id'],
+                        'fullname' => $data['student_firstname']." ".$data['student_lastname'],
+                        'user_login' => true
+                    );
+                    $this->session->set_userdata($userdata);
+                    redirect(base_url('main'));
+                }else{
+                    redirect(base_url());
+                }
+            }else{                
+                $this->session->set_flashdata('error','Unable to save registration details!');
+                redirect(base_url('signup'));
+            }            
         }
         //===============================User Module=========================================
 //====================================================================================================================================
