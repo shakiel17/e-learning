@@ -230,11 +230,12 @@
             $topic_id=$this->input->post('topic_id');
             $lesson_id=$this->input->post('lesson_id');
             $description=$this->input->post('description');            
+            $points=$this->input->post('points');
             $date=date('Y-m-d');
             if($id==""){
-                $result=$this->db->query("INSERT INTO assignment(`description`,lesson_id,topic_id,datearray) VALUES('$description','$lesson_id','$topic_id','$date')");
+                $result=$this->db->query("INSERT INTO assignment(`description`,lesson_id,topic_id,datearray,points) VALUES('$description','$lesson_id','$topic_id','$date','$points')");
             }else{
-                $result=$this->db->query("UPDATE assignment SET `description`='$description' WHERE id='$id'");
+                $result=$this->db->query("UPDATE assignment SET `description`='$description',points='$points' WHERE id='$id'");
             }
             if($result){
                 return true;
@@ -291,11 +292,12 @@
             $topic_id=$this->input->post('topic_id');
             $lesson_id=$this->input->post('lesson_id');
             $description=$this->input->post('description');            
+            $points=$this->input->post('points');
             $date=date('Y-m-d');
             if($id==""){
-                $result=$this->db->query("INSERT INTO quizzes(`description`,lesson_id,topic_id,datearray) VALUES('$description','$lesson_id','$topic_id','$date')");
+                $result=$this->db->query("INSERT INTO quizzes(`description`,lesson_id,topic_id,datearray,points) VALUES('$description','$lesson_id','$topic_id','$date','$points')");
             }else{
-                $result=$this->db->query("UPDATE quizzes SET `description`='$description' WHERE id='$id'");
+                $result=$this->db->query("UPDATE quizzes SET `description`='$description',points='$points' WHERE id='$id'");
             }
             if($result){
                 return true;
@@ -366,6 +368,108 @@
                 $time=date('H:i:s');
                 $this->db->query("UPDATE student SET date_login='$date',time_login='$time' WHERE username='$username'");                
                 return $result->row_array();
+            }else{
+                return false;
+            }
+        }
+        public function getAllLessonByStatus($status){
+            $result=$this->db->query("SELECT * FROM lessons WHERE `status`='$status' ORDER BY `quarter` ASC, id ASC");
+            return $result->result_array();
+        }
+        public function getAllTaskByStatus($id,$status){
+            $result=$this->db->query("SELECT l.description as lesson,q.* FROM lessons_details q INNER JOIN lessons l ON l.id=q.lesson_id WHERE l.id='$id' AND q.status='$status' ORDER BY q.datearray ASC");
+            return $result->result_array();
+        }        
+        public function getAllQuizzesByLessonStatus($id,$status){
+            $result=$this->db->query("SELECT l.description,q.* FROM quizzes q INNER JOIN lessons l ON l.id=q.lesson_id WHERE l.id='$id' AND q.status='$status' ORDER BY q.datearray ASC");
+            return $result->result_array();
+        }
+        public function getAllAssignmentsByLessonStatus($id,$status){
+            $result=$this->db->query("SELECT l.description,q.* FROM assignment q INNER JOIN lessons l ON l.id=q.lesson_id WHERE l.id='$id' AND q.status='$status' ORDER BY q.datearray ASC");
+            return $result->result_array();
+        }
+        public function getAllAssignmentByTaskStatus($id,$status){
+            $result=$this->db->query("SELECT * FROM assignment WHERE topic_id='$id' AND `status`='posted' ORDER BY datearray ASC,`description` ASC");
+            return $result->result_array();
+        }
+        public function getAllQuizByTaskStatus($id,$status){
+            $result=$this->db->query("SELECT * FROM quizzes WHERE topic_id='$id' AND `status`='$status' ORDER BY datearray ASC,`description` ASC");
+            return $result->result_array();
+        }
+        public function getAllAssignmentByStudent($id,$student_id){
+            $result=$this->db->query("SELECT * FROM assignment_details WHERE assignment_id='$id' AND student_id='$student_id'");
+            if($result->num_rows()>0){
+                return $result->row_array();
+            }else{
+                return false;
+            }
+        }
+        public function remove_student_assignment_attachment($id){
+            $result=$this->db->query("DELETE FROM assignment_details WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function save_student_assignment_attachment(){
+            $student_id=$this->session->student_id;
+            $id=$this->input->post('id');
+            $topic_id=$this->input->post('topic_id');
+            $lesson_id=$this->input->post('lesson_id');
+            $fileName=basename($_FILES["file"]["name"]);
+            $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
+            $allowTypes = array('pdf');
+            if(in_array($fileType,$allowTypes)){
+                $image = $_FILES["file"]["tmp_name"];
+                $imgContent=addslashes(file_get_contents($image));
+                $result=$this->db->query("INSERT INTO assignment_details(assignment_id,student_id,document,score) VALUES('$id','$student_id','$imgContent','')");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getSingleAssignmentByStudent($id){
+            $result=$this->db->query("SELECT * FROM assignment_details WHERE id='$id'");
+            return $result->row_array();
+        }
+        public function getAllQuizzesByStudent($id,$student_id){
+            $result=$this->db->query("SELECT * FROM quizzes_details WHERE quiz_id='$id' AND student_id='$student_id'");
+            if($result->num_rows()>0){
+                return $result->row_array();
+            }else{
+                return false;
+            }
+        }
+        public function save_student_quiz_attachment(){
+            $student_id=$this->session->student_id;
+            $id=$this->input->post('id');
+            $topic_id=$this->input->post('topic_id');
+            $lesson_id=$this->input->post('lesson_id');
+            $fileName=basename($_FILES["file"]["name"]);
+            $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
+            $allowTypes = array('pdf');
+            if(in_array($fileType,$allowTypes)){
+                $image = $_FILES["file"]["tmp_name"];
+                $imgContent=addslashes(file_get_contents($image));
+                $result=$this->db->query("INSERT INTO quizzes_details(quiz_id,student_id,document,score) VALUES('$id','$student_id','$imgContent','')");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getSingleQuizByStudent($id){
+            $result=$this->db->query("SELECT * FROM quizzes_details WHERE id='$id'");
+            return $result->row_array();
+        }
+        public function remove_student_quiz_attachment($id){
+            $result=$this->db->query("DELETE FROM quizzes_details WHERE id='$id'");
+            if($result){
+                return true;
             }else{
                 return false;
             }

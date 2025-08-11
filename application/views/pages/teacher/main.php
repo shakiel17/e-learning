@@ -53,7 +53,7 @@
     <div class="box col-md-12">
         <div class="box-inner">
             <div class="box-header well">
-                <h2><i class="glyphicon glyphicon-user"></i> New Students</h2>
+                <h2><i class="glyphicon glyphicon-th-list"></i> Leaderboards</h2>
 
                 <!-- <div class="box-icon">
                     <a href="#" class="btn btn-setting btn-round btn-default"><i
@@ -65,28 +65,7 @@
                 </div> -->
             </div>
             <div class="box-content">
-                <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
-                    <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>Student Name</th>
-                        <th>Gender</th>
-                        <th>Username</th>                        
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach($newstudent as $item){
-                            echo "<tr>";
-                                echo "<td>$item[student_id]</td>";
-                                echo "<td>$item[student_lastname], $item[student_firstname] $item[student_middlename]</td>";
-                                echo "<td>$item[student_gender]</td>";
-                                echo "<td>$item[username]</td>";
-                            echo "</tr>";
-                        }
-                        ?>
-                    </tbody>
-                    </table>
+                
             </div>
         </div>
     </div>

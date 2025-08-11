@@ -89,6 +89,15 @@ $route['teachermain'] = 'pages/teachermain';
 $route['teacher_authenticate'] = 'pages/teacher_authenticate';
 $route['teacher'] = 'pages/teacher';
 //=====================User Route===========================
+$route['view_my_quiz/(:any)'] = 'pages/view_my_quiz/$1';
+$route['save_student_quiz_attachment'] = 'pages/save_student_quiz_attachment';
+$route['view_my_assignment/(:any)'] = 'pages/view_my_assignment/$1';
+$route['save_student_assignment_attachment'] = 'pages/save_student_assignment_attachment';
+$route['remove_student_assignment_attachment/(:any)/(:any)/(:any)'] = 'pages/remove_student_assignment_attachment/$1/$2/$3';
+$route['view_student_assignment/(:any)/(:any)'] = 'pages/view_student_assignment/$1/$2';
+$route['view_student_quiz/(:any)/(:any)'] = 'pages/view_student_quiz/$1/$2';
+$route['view_lesson_topic/(:any)'] = 'pages/view_lesson_topic/$1';
+$route['student_lesson'] = 'pages/student_lesson';
 $route['main'] = 'pages/main';
 $route['student_authenticate'] = 'pages/student_authenticate';
 $route['registration'] = 'pages/registration';

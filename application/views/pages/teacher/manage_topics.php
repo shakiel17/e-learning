@@ -49,8 +49,8 @@ if($this->session->flashdata('failed')){
                         <?php
                         $x=1;
                         foreach($users as $item){ 
-                            $quiz=$this->Learning_model->getAllQuizzesByLesson($lesson['id'],$item['id']);
-                            $assign=$this->Learning_model->getAllAssignmentsByLesson($lesson['id'],$item['id']);
+                            $quiz=$this->Learning_model->getAllQuizzesByLesson($lesson['id']);
+                            $assign=$this->Learning_model->getAllAssignmentsByLesson($lesson['id']);
                             if($item['status']=="pending"){
                                 $post="";
                                 $unpost="style='display:none;'";

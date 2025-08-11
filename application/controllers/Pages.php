@@ -93,6 +93,118 @@ date_default_timezone_set('Asia/Manila');
                 redirect(base_url('signup'));
             }            
         }
+        public function student_lesson(){
+            $page = "student_lesson";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                        
+            if($this->session->user_login){}
+            else{redirect(base_url());}
+            $data['lessons'] = $this->Learning_model->getAllLessonByStatus('posted');
+            $this->load->view('includes/header'); 
+            $this->load->view('includes/navbar');           
+            $this->load->view('includes/sidebar');            
+            $this->load->view('pages/'.$page,$data);    
+            $this->load->view('includes/modal');     
+            $this->load->view('includes/footer');               
+        } 
+        public function view_lesson_topic($id){
+            $page = "view_lesson_topic";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->user_login){}
+            else{redirect(base_url());}
+            $data['users'] = $this->Learning_model->getAllTaskByStatus($id,'posted');  
+            $data['lesson'] = $this->Learning_model->getSingleLesson($id);            
+            $this->load->view('includes/header'); 
+            $this->load->view('includes/navbar');           
+            $this->load->view('includes/sidebar');            
+            $this->load->view('pages/'.$page,$data);    
+            $this->load->view('includes/modal');     
+            $this->load->view('includes/footer');
+        }
+        public function view_student_assignment($id,$lesson_id){
+            $page = "view_student_assignment";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->user_login){}
+            else{redirect(base_url());}
+            $data['users'] = $this->Learning_model->getAllAssignmentByTaskStatus($id,'posted');  
+            $data['topic'] = $this->Learning_model->getSingleTopic($id);
+            $data['lesson'] = $this->Learning_model->getSingleLesson($lesson_id);            
+            $this->load->view('includes/header'); 
+            $this->load->view('includes/navbar');           
+            $this->load->view('includes/sidebar');            
+            $this->load->view('pages/'.$page,$data);    
+            $this->load->view('includes/modal');     
+            $this->load->view('includes/footer');
+        }
+        public function view_student_quiz($id,$lesson_id){
+            $page = "view_student_quiz";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->user_login){}
+            else{redirect(base_url());}
+            $data['users'] = $this->Learning_model->getAllQuizByTaskStatus($id,'posted');  
+            $data['topic'] = $this->Learning_model->getSingleTopic($id);
+            $data['lesson'] = $this->Learning_model->getSingleLesson($lesson_id);            
+            $this->load->view('includes/header'); 
+            $this->load->view('includes/navbar');           
+            $this->load->view('includes/sidebar');            
+            $this->load->view('pages/'.$page,$data);    
+            $this->load->view('includes/modal');     
+            $this->load->view('includes/footer');
+        }
+        public function remove_student_assignment_attachment($id,$topic_id,$lesson_id){            
+            $save=$this->Learning_model->remove_student_assignment_attachment($id);
+            if($save){
+                $this->session->set_flashdata('success','Assignment attachment details successfully removed!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to remove assignment attachment details!');
+            }
+            redirect(base_url('view_student_assignment/'.$topic_id."/".$lesson_id));
+        }
+        public function save_student_assignment_attachment(){
+            $id=$this->input->post('lesson_id');
+            $topic_id=$this->input->post('topic_id');
+            $save=$this->Learning_model->save_student_assignment_attachment();
+            if($save){
+                $this->session->set_flashdata('success','Assignment attachment details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save assignment attachment details!');
+            }
+            redirect(base_url('view_student_assignment/'.$topic_id."/".$id));
+        }
+        public function view_my_assignment($id){
+            $page = "view_topic";
+            if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
+                show_404();
+            }                                                 
+            $data['document'] = $this->Learning_model->getSingleAssignmentByStudent($id);
+            $this->load->view('pages/teacher/'.$page,$data);                 
+        }
+        public function save_student_quiz_attachment(){
+            $id=$this->input->post('lesson_id');
+            $topic_id=$this->input->post('topic_id');
+            $save=$this->Learning_model->save_student_quiz_attachment();
+            if($save){
+                $this->session->set_flashdata('success','Quiz attachment details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save quiz attachment details!');
+            }
+            redirect(base_url('view_student_quiz/'.$topic_id."/".$id));
+        }
+        public function view_my_quiz($id){
+            $page = "view_topic";
+            if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
+                show_404();
+            }                                                 
+            $data['document'] = $this->Learning_model->getSingleQuizByStudent($id);
+            $this->load->view('pages/teacher/'.$page,$data);                 
+        }
         //===============================User Module=========================================
 //====================================================================================================================================
         //===============================Teacher Module======================================
@@ -228,9 +340,7 @@ date_default_timezone_set('Asia/Manila');
             $page = "view_topic";
             if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
                 show_404();
-            }                                     
-            if($this->session->teacher_login){}
-            else{redirect(base_url('main'));}
+            }                                                 
             $data['document'] = $this->Learning_model->getSingleTopic($id);
             $this->load->view('pages/teacher/'.$page,$data);                 
         }
@@ -305,9 +415,7 @@ date_default_timezone_set('Asia/Manila');
             $page = "view_topic";
             if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
                 show_404();
-            }                                     
-            if($this->session->teacher_login){}
-            else{redirect(base_url('main'));}
+            }                                                 
             $data['document'] = $this->Learning_model->getSingleAssignment($id);
             $this->load->view('pages/teacher/'.$page,$data);                 
         }
@@ -375,9 +483,7 @@ date_default_timezone_set('Asia/Manila');
             $page = "view_topic";
             if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
                 show_404();
-            }                                     
-            if($this->session->teacher_login){}
-            else{redirect(base_url('main'));}
+            }                                               
             $data['document'] = $this->Learning_model->getSingleQuiz($id);
             $this->load->view('pages/teacher/'.$page,$data);                 
         }

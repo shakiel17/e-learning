@@ -41,6 +41,7 @@ if($this->session->flashdata('failed')){
                     <tr>   
                         <th>No.</th>                     
                         <th>Description</th>
+                        <th>Total Points</th>
                         <th>Attachment</th>                        
                         <th>Status</th>
                         <th width="20%">Action</th>
@@ -76,14 +77,15 @@ if($this->session->flashdata('failed')){
                             echo "<tr>";
                                 echo "<td>$x.</td>";
                                 echo "<td>$item[description]</td>";                                
+                                echo "<td>$item[points]</td>";
                                 echo "<td align='center'>$upload $view</td>"; 
                                 echo "<td>$item[status]</td>";
                                 ?>
                                 <td>
-                                    <a href="#" class="btn btn-warning btn-sm editAssignment" data-toggle="modal" data-target="#ManageAssignment" data-id="<?=$item['id'];?>_<?=$topic['id'];?>_<?=$lesson['id'];?>_<?=$item['description'];?>"><i class="glyphicon glyphicon-edit"></i> Edit</a>                                    
-                                    <a href="<?=base_url('update_quiz_status/'.$item['id']."/".$topic['id']."/".$lesson['id']."/posted");?>" class="btn btn-primary btn-sm" onclick="return confirm('Do you wish to post this quiz?');return false;" <?=$post;?>><i class="glyphicon glyphicon-upload"></i> Post</a>
-                                    <a href="<?=base_url('update_quiz_status/'.$item['id']."/".$topic['id']."/".$lesson['id']."/pending");?>" class="btn btn-info btn-sm" onclick="return confirm('Do you wish to unpost this quiz?');return false;" <?=$unpost;?>><i class="glyphicon glyphicon-download"></i> Unpost</a>
-                                    <a href="<?=base_url('update_quiz_status/'.$item['id']."/".$topic['id']."/".$lesson['id']."/completed");?>" class="btn btn-success btn-sm" onclick="return confirm('Do you wish to complete this quiz?');return false;" <?=$complete;?>><i class="glyphicon glyphicon-thumbs-up"></i> Complete</a>
+                                    <a href="#" class="btn btn-warning btn-sm editAssignment" data-toggle="modal" data-target="#ManageAssignment" data-id="<?=$item['id'];?>_<?=$topic['id'];?>_<?=$lesson['id'];?>_<?=$item['description'];?>_<?=$item['points'];?>"><i class="glyphicon glyphicon-edit"></i> Edit</a>                                    
+                                    <a href="<?=base_url('update_assignment_status/'.$item['id']."/".$topic['id']."/".$lesson['id']."/posted");?>" class="btn btn-primary btn-sm" onclick="return confirm('Do you wish to post this quiz?');return false;" <?=$post;?>><i class="glyphicon glyphicon-upload"></i> Post</a>
+                                    <a href="<?=base_url('update_assignment_status/'.$item['id']."/".$topic['id']."/".$lesson['id']."/pending");?>" class="btn btn-info btn-sm" onclick="return confirm('Do you wish to unpost this quiz?');return false;" <?=$unpost;?>><i class="glyphicon glyphicon-download"></i> Unpost</a>
+                                    <a href="<?=base_url('update_assignment_status/'.$item['id']."/".$topic['id']."/".$lesson['id']."/completed");?>" class="btn btn-success btn-sm" onclick="return confirm('Do you wish to complete this quiz?');return false;" <?=$complete;?>><i class="glyphicon glyphicon-thumbs-up"></i> Complete</a>
                                 </td>
                                 <?php
                             echo "</tr>";

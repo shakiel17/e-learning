@@ -120,6 +120,7 @@
         document.getElementById('assign_topic_id').value=id[1];
         document.getElementById('assign_lesson_id').value=id[2];
         document.getElementById('assign_description').value=id[3];
+        document.getElementById('assign_points').value=id[4];
     });
     $('.assignmentAttach').click(function(){
         var data=$(this).data('id');
@@ -142,13 +143,29 @@
         document.getElementById('quiz_topic_id').value=id[1];
         document.getElementById('quiz_lesson_id').value=id[2];
         document.getElementById('quiz_description').value=id[3];
+        document.getElementById('quiz_points').value=id[4];
     });
+    
     $('.quizAttach').click(function(){
         var data=$(this).data('id');
         var id=data.split('_');
         document.getElementById('quiz_attach_id').value=id[0];        
         document.getElementById('quiz_topic_attach_lesson_id').value=id[1];
         document.getElementById('quiz_attach_lesson_id').value=id[2];
+    });
+    $('.assignStudentAttach').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('assign_student_attach_id').value=id[0];        
+        document.getElementById('assign_student_topic_attach_lesson_id').value=id[1];
+        document.getElementById('assign_student_attach_lesson_id').value=id[2];
+    });
+    $('.quizStudentAttach').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('quiz_student_attach_id').value=id[0];        
+        document.getElementById('quiz_student_topic_attach_lesson_id').value=id[1];
+        document.getElementById('quiz_student_attach_lesson_id').value=id[2];
     });
 </script>
 

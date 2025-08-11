@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>            
-            <a class="navbar-brand" href="<?=base_url('teachermain');?>"> 
+            <a class="navbar-brand" href="<?=base_url('main');?>"> 
                 <!-- <img alt="Charisma Logo" src="<?=base_url('design/img/logo20.png');?>" class="hidden-xs"/> -->
                 <span>e-Learning</span>
             </a>

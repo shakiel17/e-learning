@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>e-Learning Website</title>
     <link rel="stylesheet" href="<?=base_url('design/users/style.css');?>">
-   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+   <!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script> -->
    <link rel="shortcut icon" href="<?=base_url('design/img/favicon.ico');?>">
   </head>
   <body>
@@ -18,10 +18,12 @@
           </div>
           <div class="field space">
             <span class="fa fa-lock"></span>
-            <input type="password" class="pass-key" required placeholder="Password" name="password" autocomplete="off">
-            <!-- <span class="show">SHOW</span> -->
-          </div>
+            <input type="password" class="pass-key" required placeholder="Password" name="password" id="pwd" autocomplete="off">            
+          </div>                
           <div class="pass">
+            <div class="signup">
+              <input type="checkbox" onclick="pwd.type =  checked ? 'text' : 'password'"> Show Password
+            </div>
             <?php
             if($this->session->flashdata('error')){
                 echo "<div style='color:red;'>".$this->session->error."</div>";

@@ -115,6 +115,10 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Description</label>
                     <textarea name="description" rows="3" class="form-control" id="assign_description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Total Points</label>
+                    <input type="text" name="points" class="form-control" id="assign_points">
                 </div>                                
             </div>
             <div class="modal-footer">
@@ -167,6 +171,10 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Description</label>
                     <textarea name="description" rows="3" class="form-control" id="quiz_description" required></textarea>
+                </div>                                
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Total Points</label>
+                    <input type="text" name="points" class="form-control" id="quiz_points">
                 </div>                                
             </div>
             <div class="modal-footer">
