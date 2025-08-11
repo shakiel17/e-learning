@@ -131,7 +131,65 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Category</label>
                     <input type="text" class="form-control" id="game_category" placeholder="(e.g. Identification, Multiple Choice, Fill in the blanks)" name="category">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Instructions</label>
+                    <textarea name="instructions" class="form-control" rows="3" id="game_instructions"></textarea>
                 </div>                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ManageQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" action="<?=base_url('save_game');?>" method="POST">
+                <input type="hidden" name="id" id="question_id">
+                <input type="hidden" name="game_id" id="question_game_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Manage Game</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Question</label>
+                    <input type="text" class="form-control" id="question_description" placeholder="" name="description">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Choice 1</label>
+                    <input type="text" class="form-control" id="question_choice1" placeholder="" name="choice1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Choice 2</label>
+                    <input type="text" class="form-control" id="question_choice1" placeholder="" name="choice2">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Choice 3</label>
+                    <input type="text" class="form-control" id="question_choice1" placeholder="" name="choice3">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Choice 4</label>
+                    <input type="text" class="form-control" id="question_choice1" placeholder="" name="choice4">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Answer</label>
+                    <input type="text" class="form-control" id="question_choice1" placeholder="" name="answer">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Category</label>
+                    <select name="category" class="form-control" required id="question_category">
+                        <option value="">Select Category</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Difficult">Difficult</option>
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>

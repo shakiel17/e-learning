@@ -681,6 +681,40 @@ date_default_timezone_set('Asia/Manila');
             $this->load->view('includes/admin/modal');
             $this->load->view('includes/footer');
         }
+        public function save_game(){
+            $save=$this->Learning_model->save_game();
+            if($save){
+                $this->session->set_flashdata('success','Game details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save game details!');
+            }
+            redirect(base_url('manage_games'));
+        }
+        public function delete_game($id){
+            $save=$this->Learning_model->delete_game($id);
+            if($save){
+                $this->session->set_flashdata('success','Game details successfully deleted!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to delete game details!');
+            }
+            redirect(base_url('manage_games'));
+        }
+        public function manage_games_question($id){
+            $page = "manage_games_details";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->admin_login){}
+            else{redirect(base_url('admin'));}
+            $data['games'] = $this->Learning_model->getAllGamesDetails($id);            
+            $data['game'] = $this->Learning_model->getSingleGame($id);
+            $this->load->view('includes/header');
+            $this->load->view('includes/admin/navbar');
+            $this->load->view('includes/admin/sidebar');
+            $this->load->view('pages/admin/'.$page,$data);
+            $this->load->view('includes/admin/modal');
+            $this->load->view('includes/footer');
+        }
     //===================================Admin Module========================================
 }
 ?>

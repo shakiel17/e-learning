@@ -51,6 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 #
 //=====================Admin Route==========================
+$route['delete_game_question/(:any)/(:any)'] = 'pages/delete_game_question/$1/$2';
+$route['save_game_question'] = 'pages/save_game_question';
+$route['manage_games_question/(:any)'] = 'pages/manage_games_question/$1';
+$route['delete_game/(:any)'] = 'pages/delete_game/$1';
+$route['save_game'] = 'pages/save_game';
 $route['manage_games'] = 'pages/manage_games';
 $route['delete_student/(:any)'] = 'pages/delete_student/$1';
 $route['save_student'] = 'pages/save_student';

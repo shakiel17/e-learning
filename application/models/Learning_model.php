@@ -510,5 +510,39 @@
             $result=$this->db->query("SELECT * FROM games");
             return $result->result_array();
         }
+        public function save_game(){
+            $id=$this->input->post('id');
+            $description=$this->input->post('description');
+            $category=$this->input->post('category');
+            $instructions=$this->input->post('instructions');
+            if($id==""){
+                $result=$this->db->query("INSERT INTO games(`description`,category,instructions) VALUES('$description','$category','$instructions')");
+            }else{
+                $result=$this->db->query("UPDATE games SET `description`='$description',category='$category',instructions='$instructions' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function delete_game($id){
+            $result=$this->db->query("DELETE FROM games WHERE id='$id'");
+            if($result){
+                $this->db->query("DELETE FROM game_details WHERE game_id='$id'");
+                $this->db->query("DELETE FROM leaderboards WHERE game_id='$id'");
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getAllGamesDetails($id){
+            $result=$this->db->query("SELECT * FROM game_details WHERE game_id='$id'");
+            return $result->result_array();
+        }
+        public function getSingleGame($id){
+            $result=$this->db->query("SELECT * FROM games WHERE id='$id'");
+            return $result->row_array();
+        }
     }
 ?>

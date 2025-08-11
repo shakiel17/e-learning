@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `game_details`;
 CREATE TABLE `game_details` (
   `id` int NOT NULL AUTO_INCREMENT,
   `game_id` varchar(45) DEFAULT NULL,
-  `game_question` varchar(100) DEFAULT NULL,
+  `game_question` text,
   `choice1` varchar(100) DEFAULT NULL,
   `choice2` varchar(100) DEFAULT NULL,
   `choice3` varchar(100) DEFAULT NULL,
@@ -112,8 +112,9 @@ CREATE TABLE `games` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` text,
   `category` varchar(45) DEFAULT NULL,
+  `instructions` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +123,7 @@ CREATE TABLE `games` (
 
 LOCK TABLES `games` WRITE;
 /*!40000 ALTER TABLE `games` DISABLE KEYS */;
+INSERT INTO `games` VALUES (1,'Vocabulary','Identification',NULL);
 /*!40000 ALTER TABLE `games` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,4 +359,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-11 13:25:07
+-- Dump completed on 2025-08-11 13:50:22

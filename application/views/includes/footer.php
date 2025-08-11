@@ -192,6 +192,32 @@
         document.getElementById('game_id').value=id[0];
         document.getElementById('game_description').value=id[1];
         document.getElementById('game_category').value=id[2];
+        document.getElementById('game_instructions').value=id[3];
+    });
+    $('.addQuestion').click(function(){
+        var data=$(this).data('id');
+        document.getElementById('question_id').value='';
+        document.getElementById('question_game_id').value= data;
+        document.getElementById('question_description').value='';
+        document.getElementById('question_choice1').value='';
+        document.getElementById('question_choice2').value='';
+        document.getElementById('question_choice3').value='';
+        document.getElementById('question_choice4').value='';
+        document.getElementById('question_answer').value='';
+        document.getElementById('question_category').value='';
+    });
+    $('.editQuestion').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('question_id').value=id[0];
+        document.getElementById('question_game_id').value=id[1];
+        document.getElementById('question_description').value=id[2];
+        document.getElementById('question_choice1').value=id[3];
+        document.getElementById('question_choice2').value=id[4];
+        document.getElementById('question_choice3').value=id[5];
+        document.getElementById('question_choice4').value=id[6];
+        document.getElementById('question_answer').value=id[7];
+        document.getElementById('question_category').value=id[8];
     });
 </script>
 
