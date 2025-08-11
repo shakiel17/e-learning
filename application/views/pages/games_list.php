@@ -6,7 +6,7 @@
             <a href="<?=base_url('adminmain');?>">My Dashboard</a>
         </li>        
         <li>
-            Games Manager
+            Gamification
         </li>
     </ul>
 </div>
@@ -34,8 +34,7 @@ if($this->session->flashdata('failed')){
                     <thead>
                     <tr>
                         <th>Topic</th>                        
-                        <th>Category</th>
-                        <th>Instructions</th>
+                        <th>Category</th>                        
                         <th width="20%">Action</th>
                     </tr>
                     </thead>
@@ -44,13 +43,10 @@ if($this->session->flashdata('failed')){
                         foreach($games as $item){                            
                             echo "<tr>";
                                 echo "<td>$item[description]</td>";
-                                echo "<td>$item[category]</td>";
-                                echo "<td>$item[instructions]</td>";
+                                echo "<td>$item[category]</td>";                                
                                 ?>
-                                <td>
-                                    <a href="#" class="btn btn-warning btn-sm editGame" data-toggle="modal" data-target="#ManageGame" data-id="<?=$item['id'];?>_<?=$item['description'];?>_<?=$item['category'];?>_<?=$item['instructions'];?>"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                                    <a href="<?=base_url('manage_games_question/'.$item['id']);?>" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-cog"></i> Manage</a>
-                                    <a href="<?=base_url('delete_game/'.$item['id']);?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you wish to delete this game?');return false;"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+                                <td>                                    
+                                    <a href="<?=base_url('enter_game/'.$item['id']);?>" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-inbox"></i> Enter Game</a>                                    
                                 </td>
                                 <?php
                             echo "</tr>";

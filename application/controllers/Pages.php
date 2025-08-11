@@ -205,6 +205,58 @@ date_default_timezone_set('Asia/Manila');
             $data['document'] = $this->Learning_model->getSingleQuizByStudent($id);
             $this->load->view('pages/teacher/'.$page,$data);                 
         }
+        public function games_list(){
+            $page = "games_list";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                        
+            if($this->session->user_login){}
+            else{redirect(base_url());}
+            $data['games'] = $this->Learning_model->getAllGames();
+            $this->load->view('includes/header'); 
+            $this->load->view('includes/navbar');           
+            $this->load->view('includes/sidebar');            
+            $this->load->view('pages/'.$page,$data);    
+            $this->load->view('includes/modal');     
+            $this->load->view('includes/footer');               
+        }
+        public function enter_game($id){
+            $page = "game_home";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                        
+            if($this->session->user_login){}
+            else{redirect(base_url());}
+            $data['game'] = $this->Learning_model->getSingleGame($id);
+            $gamedata=array('game_score');
+            $this->session->unset_userdata($gamedata);
+            $this->load->view('includes/header'); 
+            $this->load->view('includes/navbar');           
+            $this->load->view('includes/sidebar');            
+            $this->load->view('pages/'.$page,$data);    
+            $this->load->view('includes/modal');     
+            $this->load->view('includes/footer');               
+        }
+        public function start_game($id,$category,$game_category){
+            $page = "start_game";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                        
+            if($this->session->user_login){}
+            else{redirect(base_url());}
+            $data['game'] = $this->Learning_model->getSingleGame($id);
+            $data['games'] = $this->Learning_model->getAllGamesById($id,$category);
+            if(!isset($this->session->game_score)){
+                $this->session->set_userdata('game_score', 0);
+            }            
+            $data['game_category'] = $game_category;
+            $this->load->view('includes/header'); 
+            $this->load->view('includes/navbar');           
+            $this->load->view('includes/sidebar');            
+            $this->load->view('pages/'.$page,$data);    
+            $this->load->view('includes/modal');     
+            $this->load->view('includes/footer');               
+        } 
         //===============================User Module=========================================
 //====================================================================================================================================
         //===============================Teacher Module======================================
@@ -712,8 +764,18 @@ date_default_timezone_set('Asia/Manila');
             $this->load->view('includes/admin/navbar');
             $this->load->view('includes/admin/sidebar');
             $this->load->view('pages/admin/'.$page,$data);
-            $this->load->view('includes/admin/modal');
+            $this->load->view('includes/admin/modal',$data);
             $this->load->view('includes/footer');
+        }
+        public function save_game_question(){
+            $id=$this->input->post('game_id');
+            $save=$this->Learning_model->save_game_question();
+            if($save){
+                $this->session->set_flashdata('success','Game question details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save game question details!');
+            }
+            redirect(base_url('manage_games_question/'.$id));
         }
     //===================================Admin Module========================================
 }

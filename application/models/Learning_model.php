@@ -544,5 +544,30 @@
             $result=$this->db->query("SELECT * FROM games WHERE id='$id'");
             return $result->row_array();
         }
+        public function save_game_question(){
+            $id=$this->input->post('id');
+            $game_id=$this->input->post('game_id');
+            $description=$this->input->post('description');
+            $choice1=$this->input->post('choice1');
+            $choice2=$this->input->post('choice2');
+            $choice3=$this->input->post('choice3');
+            $choice4=$this->input->post('choice4');
+            $answer=$this->input->post('answer');
+            $category=$this->input->post('category');
+            if($id==""){
+                $result=$this->db->query("INSERT INTO game_details(game_id,game_question,choice1,choice2,choice3,choice4,answer,category) VALUES('$game_id','$description','$choice1','$choice2','$choice3','$choice4','$answer','$category')");
+            }else{
+                $result=$this->db->query("UPDATE game_details SET `description`='$description',choice1='$choice1',choice2='$choice2',choice3='$choice3',choice4='$choice4',answer='$answer',category='$category' WHERE id='$id'");
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getAllGamesById($id,$category){
+            $result=$this->db->query("SELECT * FROM game_details WHERE category='$category' AND game_id='$id' ORDER BY RAND() LIMIT 1");
+            return $result->row_array();
+        }
     }
 ?>

@@ -149,12 +149,12 @@
 <div class="modal fade" id="ManageQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form role="form" action="<?=base_url('save_game');?>" method="POST">
+            <form role="form" action="<?=base_url('save_game_question');?>" method="POST">
                 <input type="hidden" name="id" id="question_id">
                 <input type="hidden" name="game_id" id="question_game_id">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>Manage Game</h3>
+                <h3>Game Question (<?=$game['description'];?> | <?=$game['category'];?>)</h3>
             </div>
             <div class="modal-body">
                 <div class="form-group">
