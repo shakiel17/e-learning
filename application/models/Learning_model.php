@@ -79,6 +79,10 @@
             $result=$this->db->query("SELECT * FROM users WHERE username='$username'");
             return $result->row_array();
         }
+        public function getStudentUser($username){
+            $result=$this->db->query("SELECT * FROM student WHERE username='$username'");
+            return $result->row_array();
+        }
         public function delete_users($id){
             $result=$this->db->query("DELETE FROM users WHERE id='$id'");
             if($result){
@@ -507,7 +511,7 @@
             }
         }
         public function getAllGames(){
-            $result=$this->db->query("SELECT * FROM games");
+            $result=$this->db->query("SELECT * FROM games ORDER BY id ASC");
             return $result->result_array();
         }
         public function save_game(){
@@ -568,6 +572,24 @@
         public function getAllGamesById($id,$category){
             $result=$this->db->query("SELECT * FROM game_details WHERE category='$category' AND game_id='$id' ORDER BY RAND() LIMIT 1");
             return $result->row_array();
+        }
+        public function save_result($game_id,$category,$score){
+            $student_id=$this->session->student_id;
+            $check=$this->db->query("SELECT * FROM leaderboards WHERE game_id='$game_id' AND student_id='$student_id' AND category='$category'");
+            if($check->num_rows()>0){
+                $row=$check->row_array();
+                if($score > $row['score']){
+                    $result=$this->db->query("UPDATE leaderboards SET score='$score' WHERE game_id='$game_id' AND student_id='$student_id' AND category='$category'");
+                }
+                return true;
+            }else{
+                $this->db->query("INSERT INTO leaderboards(game_id,student_id,score,category) VALUES('$game_id','$student_id','$score','$category')");
+                return true;
+            }
+        }
+        public function getLeaderboardsByCategory($id,$category){
+            $result=$this->db->query("SELECT * FROM leaderboards WHERE game_id='$id' AND category='$category' ORDER BY score DESC LIMIT 10");
+            return $result->result_array();
         }
     }
 ?>

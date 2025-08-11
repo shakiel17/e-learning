@@ -26,7 +26,7 @@
                 </ul>
             </div>
             <?php
-            $user=$this->Learning_model->getSingleUser($this->session->username);
+            $user=$this->Learning_model->getStudentUser($this->session->username);
             ?>
             <div class="btn-group pull-right theme-container animated tada">
                 <p>Login Date/Time: <?=date('m/d/Y',strtotime($user['date_login']));?> / <?=date('h:i A',strtotime($user['time_login']));?></p>

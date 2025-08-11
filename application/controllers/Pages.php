@@ -213,6 +213,8 @@ date_default_timezone_set('Asia/Manila');
             if($this->session->user_login){}
             else{redirect(base_url());}
             $data['games'] = $this->Learning_model->getAllGames();
+            $gamedata=array('game_score');
+            $this->session->unset_userdata($gamedata);
             $this->load->view('includes/header'); 
             $this->load->view('includes/navbar');           
             $this->load->view('includes/sidebar');            
@@ -250,13 +252,57 @@ date_default_timezone_set('Asia/Manila');
                 $this->session->set_userdata('game_score', 0);
             }            
             $data['game_category'] = $game_category;
+            $data['category'] = $category;
             $this->load->view('includes/header'); 
             $this->load->view('includes/navbar');           
             $this->load->view('includes/sidebar');            
             $this->load->view('pages/'.$page,$data);    
             $this->load->view('includes/modal');     
             $this->load->view('includes/footer');               
-        } 
+        }
+        public function submit_answer(){
+            $game_id = $this->input->post('game_id');
+            $game_category = $this->input->post('game_category');
+            $category = $this->input->post('category');
+            $correctanswer = strtolower($this->input->post('correctanswer'));
+            $youranswer = strtolower($this->input->post('youranswer'));   
+            if($correctanswer==$youranswer){
+                $this->session->game_score++;
+            } 
+            if($youranswer==""){
+                $youranswer="-";
+            }
+            redirect(base_url('check_answer/'.$game_id."/".$category."/".$game_category."/".$youranswer."/".$correctanswer));
+        }
+         public function check_answer($game_id,$category,$game_category,$youranswer,$correctanswer){
+            $page = "check_answer";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                        
+            if($this->session->user_login){}
+            else{redirect(base_url());}
+            $data['game'] = $this->Learning_model->getSingleGame($game_id);
+            $data['game_id'] = $game_id;
+            $data['game_category'] = $game_category;
+            $data['category'] = $category;
+            $data['correctanswer'] = $correctanswer;
+            $data['youranswer'] = $youranswer;
+            $this->load->view('includes/header'); 
+            $this->load->view('includes/navbar');           
+            $this->load->view('includes/sidebar');            
+            $this->load->view('pages/'.$page,$data);    
+            $this->load->view('includes/modal');     
+            $this->load->view('includes/footer');               
+        }
+        public function save_result($game_id,$category,$game_category,$score){
+            $save=$this->Learning_model->save_result($game_id,$category,$score);
+            if($save){
+                $this->session->set_flashdata('success','Result details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save result details!');
+            }
+            redirect(base_url('games_list'));
+        }
         //===============================User Module=========================================
 //====================================================================================================================================
         //===============================Teacher Module======================================

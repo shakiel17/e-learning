@@ -49,24 +49,82 @@
     </div>
 </div>
 
+<?php
+$games=$this->Learning_model->getAllGames();
+foreach($games as $game){
+    $g=$this->Learning_model->getSingleGame($game['id']);
+    $easy=$this->Learning_model->getLeaderboardsByCategory($game['id'],'Easy');
+    $moderate=$this->Learning_model->getLeaderboardsByCategory($game['id'],'Moderate');
+    $difficult=$this->Learning_model->getLeaderboardsByCategory($game['id'],'Difficult');
+                    ?> 
 <div class="row">
-    <div class="box col-md-12">
+    <div class="box col-md-4">
         <div class="box-inner">
             <div class="box-header well">
-                <h2><i class="glyphicon glyphicon-th-list"></i> Leaderboards</h2>
-
-                <!-- <div class="box-icon">
-                    <a href="#" class="btn btn-setting btn-round btn-default"><i
-                            class="glyphicon glyphicon-cog"></i></a>
-                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                            class="glyphicon glyphicon-chevron-up"></i></a>
-                    <a href="#" class="btn btn-close btn-round btn-default"><i
-                            class="glyphicon glyphicon-remove"></i></a>
-                </div> -->
+                <h2><i class="glyphicon glyphicon-th-list"></i> Leaderboards (<?=$g['description'];?>)</h2>
             </div>
             <div class="box-content">
-                
+                <table width="100%" border="0">
+                    <tr>
+                        <td colspan="2"><b>EASY CATEGORY</b></td>
+                    </tr>
+                    <tr>
+                        <td width="70%"><b>NAME</b></td>
+                        <td width="30%"><b>SCORE</b></td>
+                    </tr>
+                <?php
+                foreach($easy as $row){
+                    $name=$this->Learning_model->getSingleStudent($row['student_id']);
+                    ?>
+                    <tr>
+                        <td width="70%"><?=$name['student_firstname'];?> <?=$name['student_lastname'];?></td>
+                        <td width="30%"><?=$row['score'];?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                <tr>
+                        <td colspan="2"><b>MODERATE CATEGORY</b></td>
+                    </tr>
+                    <tr>
+                        <td width="70%"><b>NAME</b></td>
+                        <td width="30%"><b>SCORE</b></td>
+                    </tr>
+                <?php
+                foreach($moderate as $row){
+                    $name=$this->Learning_model->getSingleStudent($row['student_id']);
+                    ?>
+                    <tr>
+                        <td width="70%"><?=$name['student_firstname'];?> <?=$name['student_lastname'];?></td>
+                        <td width="30%"><?=$row['score'];?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                <tr>
+                        <td colspan="2"><b>DIFFICULT CATEGORY</b></td>
+                    </tr>
+                    <tr>
+                        <td width="70%"><b>NAME</b></td>
+                        <td width="30%"><b>SCORE</b></td>
+                    </tr>
+                <?php
+                foreach($difficult as $row){
+                    $name=$this->Learning_model->getSingleStudent($row['student_id']);
+                    ?>
+                    <tr>
+                        <td width="70%"><?=$name['student_firstname'];?> <?=$name['student_lastname'];?></td>
+                        <td width="30%"><?=$row['score'];?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
+<?php
+}
+?>

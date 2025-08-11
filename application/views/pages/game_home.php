@@ -29,7 +29,7 @@
     </div>
 
     <div class="col-md-4 col-sm-4 col-xs-12">
-        <a data-toggle="tooltip" title="<?=$game['instructions'];?>" class="well top-block" href="#">
+        <a data-toggle="tooltip" title="<?=$game['instructions'];?>" class="well top-block" href="<?=base_url('start_game/'.$game['id']."/Moderate/".$game['category']);?>">
             <i class="glyphicon glyphicon-flag yellow"></i>
 
             <div>Start Moderate Round</div>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="col-md-4 col-sm-4 col-xs-12">
-        <a data-toggle="tooltip" title="<?=$game['instructions'];?>" class="well top-block" href="#">
+        <a data-toggle="tooltip" title="<?=$game['instructions'];?>" class="well top-block" href="<?=base_url('start_game/'.$game['id']."/Difficult/".$game['category']);?>">
             <i class="glyphicon glyphicon-flag red"></i>
 
             <div>Start Difficult Round</div>
