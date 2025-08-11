@@ -474,5 +474,37 @@
                 return false;
             }
         }
+        public function getSingleStudent($id){
+            $result=$this->db->query("SELECT * FROM student WHERE student_id='$id'");
+            return $result->row_array();
+        }
+        public function getStudentAssignment($id){
+            $result=$this->db->query("SELECT l.description as lesson,ld.description as topic,a.description as assignment,a.points as items,ad.score,a.description,ad.document,ad.id as aid FROM assignment_details ad INNER JOIN assignment a ON a.id=ad.assignment_id INNER JOIN lessons_details ld ON ld.id=a.topic_id INNER JOIN lessons l ON l.id=ld.lesson_id WHERE ad.student_id='$id' AND l.status='posted' AND ld.status='posted' AND a.status='posted'");
+            return $result->result_array();
+        }
+        public function getStudentQuiz($id){
+            $result=$this->db->query("SELECT l.description as lesson,ld.description as topic,a.description as quiz,a.points as items,ad.score,a.description,ad.document,ad.id as qid FROM quizzes_details ad INNER JOIN quizzes a ON a.id=ad.quiz_id INNER JOIN lessons_details ld ON ld.id=a.topic_id INNER JOIN lessons l ON l.id=ld.lesson_id WHERE ad.student_id='$id' AND l.status='posted' AND ld.status='posted' AND a.status='posted'");
+            return $result->result_array();
+        }
+        public function save_assignment_score(){
+            $id=$this->input->post('id');
+            $score=$this->input->post('score');
+            $result=$this->db->query("UPDATE assignment_details SET score='$score' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function save_quiz_score(){
+            $id=$this->input->post('id');
+            $score=$this->input->post('score');
+            $result=$this->db->query("UPDATE quizzes_details SET score='$score' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

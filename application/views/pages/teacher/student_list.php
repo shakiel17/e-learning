@@ -48,7 +48,8 @@ if($this->session->flashdata('failed')){
                                 echo "<td>$item[student_lastname], $item[student_firstname] $item[student_middlename]</td>";
                                 echo "<td>$item[student_gender]</td>";                                
                                 ?>
-                                <td>                                    
+                                <td>  
+                                    <a href="<?=base_url('student_details/'.$item['student_id']);?>" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-th-list"></i> Manage</a>                                  
                                 </td>
                                 <?php
                             echo "</tr>";

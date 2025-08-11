@@ -167,6 +167,20 @@
         document.getElementById('quiz_student_topic_attach_lesson_id').value=id[1];
         document.getElementById('quiz_student_attach_lesson_id').value=id[2];
     });
+    $('.editAssignScore').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('assign_score_id').value=id[0];        
+        document.getElementById('assign_score_student_id').value=id[1];
+        document.getElementById('assign_score').value=id[3];                
+    });
+    $('.editQuizScore').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('quiz_score_id').value=id[0];        
+        document.getElementById('quiz_score_student_id').value=id[1];
+        document.getElementById('quiz_score').value=id[3];                
+    });
 </script>
 
 </body>

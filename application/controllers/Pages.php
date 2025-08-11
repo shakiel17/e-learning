@@ -505,6 +505,44 @@ date_default_timezone_set('Asia/Manila');
             }
             redirect(base_url('manage_quiz/'.$topic_id."/".$lesson_id));
         }
+        public function student_details($student_id){
+            $page = "student_details";
+            if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->teacher_login){}
+            else{redirect(base_url('teacher'));}
+            $data['user'] = $this->Learning_model->getSingleStudent($student_id);
+            $data['assignment'] = $this->Learning_model->getStudentAssignment($student_id);
+            $data['quizzes'] = $this->Learning_model->getStudentQuiz($student_id);
+            $data['student_id'] = $student_id;
+            $this->load->view('includes/header');
+            $this->load->view('includes/teacher/navbar');
+            $this->load->view('includes/teacher/sidebar');
+            $this->load->view('pages/teacher/'.$page,$data);
+            $this->load->view('includes/teacher/modal');
+            $this->load->view('includes/footer');
+        }
+        public function save_assignment_score(){
+            $id=$this->input->post('student_id');            
+            $save=$this->Learning_model->save_assignment_score();
+            if($save){
+                $this->session->set_flashdata('success','Assignment score details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save assignment score details!');
+            }
+            redirect(base_url('student_details/'.$id));
+        }
+        public function save_quiz_score(){
+            $id=$this->input->post('student_id');            
+            $save=$this->Learning_model->save_quiz_score();
+            if($save){
+                $this->session->set_flashdata('success',' score details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to save quiz score details!');
+            }
+            redirect(base_url('student_details/'.$id));
+        }
         //===============================Teacher Module======================================
 //====================================================================================================================================
     //===================================Admin Module========================================        

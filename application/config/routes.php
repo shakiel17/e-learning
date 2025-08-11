@@ -62,6 +62,9 @@ $route['adminmain'] = 'pages/adminmain';
 $route['admin_authenticate'] = 'pages/admin_authenticate';
 $route['admin'] = 'pages/admin';
 //=====================Teacher Route========================
+$route['save_quiz_score'] = 'pages/save_quiz_score';
+$route['save_assignment_score'] = 'pages/save_assignment_score';
+$route['student_details/(:any)'] = 'pages/student_details/$1';
 $route['update_quiz_status/(:any)/(:any)/(:any)/(:any)'] = 'pages/update_quiz_status/$1/$2/$3/$4';
 $route['view_quiz/(:any)'] = 'pages/view_quiz/$1';
 $route['save_quiz_attachment'] = 'pages/save_quiz_attachment';

@@ -211,3 +211,52 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="ManageAssignScore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" action="<?=base_url('save_assignment_score');?>" method="POST">
+                <input type="hidden" name="id" id="assign_score_id">               
+                <input type="hidden" name="student_id" id="assign_score_student_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Update Assignment Score</h3>
+            </div>
+            <div class="modal-body">                                                
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Total Points</label>
+                    <input type="text" name="score" class="form-control" id="assign_score">
+                </div>                                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ManageQuizScore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" action="<?=base_url('save_quiz_score');?>" method="POST">
+                <input type="hidden" name="id" id="quiz_score_id">               
+                <input type="hidden" name="student_id" id="quiz_score_student_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Update Quiz Score</h3>
+            </div>
+            <div class="modal-body">                                                
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Total Points</label>
+                    <input type="text" name="score" class="form-control" id="quiz_score">
+                </div>                                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
