@@ -113,3 +113,31 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="ManageGame" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" action="<?=base_url('save_game');?>" method="POST">
+                <input type="hidden" name="id" id="game_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Manage Game</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Topic</label>
+                    <input type="text" class="form-control" id="game_description" placeholder="(e.g. Vocabulary, Grammar, Reading Comprehension)" name="description">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Category</label>
+                    <input type="text" class="form-control" id="game_category" placeholder="(e.g. Identification, Multiple Choice, Fill in the blanks)" name="category">
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

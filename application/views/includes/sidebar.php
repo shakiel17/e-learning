@@ -14,7 +14,7 @@
                         </li>                        
                         <li><a class="ajax-link" href="<?=base_url('student_lesson');?>"><i class="glyphicon glyphicon-book"></i><span> Lessons</span></a>
                         </li>
-                        <li><a class="ajax-link" href="<?=base_url('games_list');?>"><i class="glyphicon glyphicon glyphicon-headphones"></i><span> Games</span></a>
+                        <li><a class="ajax-link" href="<?=base_url('games_list');?>"><i class="glyphicon glyphicon-headphones"></i><span> Games</span></a>
                         </li>                        
                     </ul>                    
                 </div>

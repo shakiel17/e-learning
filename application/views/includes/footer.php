@@ -181,6 +181,18 @@
         document.getElementById('quiz_score_student_id').value=id[1];
         document.getElementById('quiz_score').value=id[3];                
     });
+    $('.addGame').click(function(){
+        document.getElementById('game_id').value='';
+        document.getElementById('game_description').value='';
+        document.getElementById('game_category').value='';        
+    });
+    $('.editGame').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('game_id').value=id[0];
+        document.getElementById('game_description').value=id[1];
+        document.getElementById('game_category').value=id[2];
+    });
 </script>
 
 </body>

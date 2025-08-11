@@ -17,7 +17,7 @@
                         <!-- <li><a class="ajax-link" href="<?=base_url('manage_teacher');?>"><i class="glyphicon glyphicon-user"></i><span> Teacher</span></a></li> -->
                         <li><a class="ajax-link" href="<?=base_url('manage_users');?>"><i class="glyphicon glyphicon-user"></i><span> Users</span></a>
                         </li>
-                        <li><a class="ajax-link" href="<?=base_url('manage_games');?>"><i class="glyphicon glyphicon-font"></i><span> Gamify</span></a>
+                        <li><a class="ajax-link" href="<?=base_url('manage_games');?>"><i class="glyphicon glyphicon-headphones"></i><span> Gamify</span></a>
                         </li>                        
                     </ul>                    
                 </div>

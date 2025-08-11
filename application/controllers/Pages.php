@@ -666,6 +666,21 @@ date_default_timezone_set('Asia/Manila');
             }
             redirect(base_url('manage_student'));
         }
+        public function manage_games(){
+            $page = "manage_games";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }                                     
+            if($this->session->admin_login){}
+            else{redirect(base_url('admin'));}
+            $data['games'] = $this->Learning_model->getAllGames();            
+            $this->load->view('includes/header');
+            $this->load->view('includes/admin/navbar');
+            $this->load->view('includes/admin/sidebar');
+            $this->load->view('pages/admin/'.$page,$data);
+            $this->load->view('includes/admin/modal');
+            $this->load->view('includes/footer');
+        }
     //===================================Admin Module========================================
 }
 ?>

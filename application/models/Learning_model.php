@@ -506,5 +506,9 @@
                 return false;
             }
         }
+        public function getAllGames(){
+            $result=$this->db->query("SELECT * FROM games");
+            return $result->result_array();
+        }
     }
 ?>
