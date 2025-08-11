@@ -88,8 +88,9 @@ CREATE TABLE `game_details` (
   `choice3` varchar(100) DEFAULT NULL,
   `choice4` varchar(100) DEFAULT NULL,
   `answer` varchar(100) DEFAULT NULL,
+  `category` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +99,7 @@ CREATE TABLE `game_details` (
 
 LOCK TABLES `game_details` WRITE;
 /*!40000 ALTER TABLE `game_details` DISABLE KEYS */;
+INSERT INTO `game_details` VALUES (1,'1','A large antural stream of water flowing to the sea.','','','','','River','Easy'),(2,'1','A building where books are kept.','','','','','Library','Easy'),(3,'1','The opposite of hot.','','','','','Cold','Easy'),(4,'1','A place where you live.','','','','','Home','Easy'),(5,'1','Something you wear on your feet.','','','','','Shoes','Easy'),(6,'1','The color of the sky on a clear day','','','','','Blue','Easy'),(7,'1','The meal you eat in the morning.','','','','','Breakfast','Easy'),(8,'1','A pet that says `meow`.','','','','','Cat','Easy'),(9,'1','The season when leaves fall from trees.','','','','','Autumn','Easy'),(10,'1','A round fruit that is usually red or green.','','','','','Apple','Easy'),(11,'1','A journey taken for pleasure','','','','','Excursion','Moderate'),(12,'1','A place where scientific research is done.','','','','','Laboratory','Moderate'),(13,'1','Very happy and satisfied','','','','','Content','Moderate'),(14,'1','The act of giving up something valuable for a cause.','','','','','Sacrifice','Moderate'),(15,'1','To speak in a low, soft voice.','','','','','Whisper','Moderate'),(16,'1','The ability to understand and share feelings of another.','','','','','Empathy','Moderate'),(17,'1','A strong feeling of excitement or interest.','','','','','Enthusiasm','Moderate'),(18,'1','A person who makes clothes.','','','','','Tailor','Moderate'),(19,'1','A story passed down from generation to generation.','','','','','Legend','Moderate'),(20,'1','Something that cannot be seen.','','','','','Invisible','Moderate'),(21,'1','A person who studies the stars and planets.','','','','','Astronomer','Difficult'),(22,'1','Something that is impossible to avoid or prevent.','','','','','Inevitable','Difficult'),(23,'1',' A formal speech given at a ceremony.','','','','','Oration','Difficult'),(24,'1',' A person who speaks two languages fluently.','','','','','Bilingual','Difficult'),(25,'1','Lasting for a very short time.','','','','','Ephemeral','Difficult'),(26,'1','The ability to think and make decisions quickly.','','','','','Acumen','Difficult'),(27,'1','A remedy for all diseases or difficulties.','','','','','Panacea','Difficult'),(28,'1','A person who strongly opposes or fights against something.','','','','','Adversary','Difficult'),(29,'1','A speech in praise of someone who has died.','','','','','Eulogy','Difficult'),(30,'1',' A place of safety or shelter.','','','','','Sanctuary','Difficult');
 /*!40000 ALTER TABLE `game_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +116,7 @@ CREATE TABLE `games` (
   `category` varchar(45) DEFAULT NULL,
   `instructions` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +125,7 @@ CREATE TABLE `games` (
 
 LOCK TABLES `games` WRITE;
 /*!40000 ALTER TABLE `games` DISABLE KEYS */;
-INSERT INTO `games` VALUES (1,'Vocabulary','Identification',NULL);
+INSERT INTO `games` VALUES (1,'Vocabulary','Identification','Read each statement carefully and identify what is being asked. Write your answer on the space provided.');
 /*!40000 ALTER TABLE `games` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,8 +141,9 @@ CREATE TABLE `leaderboards` (
   `game_id` varchar(45) DEFAULT NULL,
   `student_id` varchar(45) DEFAULT NULL,
   `score` double DEFAULT NULL,
+  `category` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,6 +152,7 @@ CREATE TABLE `leaderboards` (
 
 LOCK TABLES `leaderboards` WRITE;
 /*!40000 ALTER TABLE `leaderboards` DISABLE KEYS */;
+INSERT INTO `leaderboards` VALUES (3,'1','25-1234',6,'Easy'),(8,'1','25-1234',13,'Moderate'),(9,'1','25-4232',9,'Easy');
 /*!40000 ALTER TABLE `leaderboards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +321,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'25-1234','Aboy','Eczekiel','Hermocilla','male','shakiel17','1234','0000-00-00','2025-08-11','08:32:40'),(2,'25-4232','Aboy','Czesha Arendelle','Villoga','female',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `student` VALUES (1,'25-1234','Aboy','Eczekiel','Hermocilla','male','shakiel17','1234','0000-00-00','2025-08-11','16:49:11'),(2,'25-4232','Aboy','Czesha Arendelle','Villoga','female','czesha28','1234','0000-00-00','2025-08-11','18:30:12');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,4 +363,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-11 13:50:22
+-- Dump completed on 2025-08-11 18:59:58
