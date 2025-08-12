@@ -48,7 +48,7 @@
         </a>
     </div>
 </div>
-
+<div class="row">
 <?php
 $games=$this->Learning_model->getAllGames();
 foreach($games as $game){
@@ -57,7 +57,7 @@ foreach($games as $game){
     $moderate=$this->Learning_model->getLeaderboardsByCategory($game['id'],'Moderate');
     $difficult=$this->Learning_model->getLeaderboardsByCategory($game['id'],'Difficult');
                     ?> 
-<div class="row">
+
     <div class="box col-md-4">
         <div class="box-inner">
             <div class="box-header well">
@@ -123,8 +123,9 @@ foreach($games as $game){
             </div>
         </div>
     </div>
-</div>
+
 
 <?php
 }
 ?>
+</div>

@@ -591,5 +591,9 @@
             $result=$this->db->query("SELECT * FROM leaderboards WHERE game_id='$id' AND category='$category' ORDER BY score DESC LIMIT 10");
             return $result->result_array();
         }
+        public function getAllGamesByIdChoice($id,$category){
+            $result=$this->db->query("SELECT * FROM game_details WHERE category='$category' AND game_id='$id' ORDER BY RAND() LIMIT 1");
+            return $result->row_array();
+        }
     }
 ?>

@@ -240,19 +240,27 @@ date_default_timezone_set('Asia/Manila');
             $this->load->view('includes/footer');               
         }
         public function start_game($id,$category,$game_category){
-            $page = "start_game";
+            $game_category=str_replace('%20',' ',$game_category);
+            if($game_category=="Multiple Choice"){
+                $page = "start_game_choice";
+                $data['games'] = $this->Learning_model->getAllGamesByIdChoice($id,$category);
+            }else{
+                $page = "start_game";
+                $data['games'] = $this->Learning_model->getAllGamesById($id,$category);
+            }            
             if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
                 show_404();
             }                        
             if($this->session->user_login){}
             else{redirect(base_url());}
-            $data['game'] = $this->Learning_model->getSingleGame($id);
-            $data['games'] = $this->Learning_model->getAllGamesById($id,$category);
+            $data['game'] = $this->Learning_model->getSingleGame($id);                     
             if(!isset($this->session->game_score)){
                 $this->session->set_userdata('game_score', 0);
             }            
             $data['game_category'] = $game_category;
             $data['category'] = $category;
+            $data['game_id'] = $id;
+            
             $this->load->view('includes/header'); 
             $this->load->view('includes/navbar');           
             $this->load->view('includes/sidebar');            
