@@ -321,7 +321,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'25-1234','Aboy','Eczekiel','Hermocilla','male','shakiel17','1234','0000-00-00','2025-08-12','10:06:46'),(2,'25-4232','Aboy','Czesha Arendelle','Villoga','female','czesha28','1234','0000-00-00','2025-08-12','08:17:01');
+INSERT INTO `student` VALUES (1,'25-1234','Aboy','Eczekiel','Hermocilla','male','shakiel17','1234','0000-00-00','2025-08-13','08:10:21'),(2,'25-4232','Aboy','Czesha Arendelle','Villoga','female','czesha28','1234','0000-00-00','2025-08-12','08:17:01');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -363,4 +363,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-12 10:09:20
+-- Dump completed on 2025-08-13  8:14:40
