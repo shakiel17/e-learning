@@ -3,7 +3,7 @@
             <div>
     <ul class="breadcrumb">
         <li>
-            <a href="<?=base_url('adminmain');?>">My Dashboard</a>
+            <a href="<?=base_url('main');?>">My Dashboard</a>
         </li>        
         <li>
             Gamification
