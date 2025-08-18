@@ -17,19 +17,36 @@ date_default_timezone_set('Asia/Manila');
         public function authenticate(){
             $username=$this->input->post('username');
             $password=$this->input->post('password');
-            $data=$this->Learning_model->authenticate($username,$password);
-            if($data){
-                $userdata=array(
-                    'username' => $username,
-                    'student_id' => $data['student_id'],
-                    'fullname' => $data['student_firstname']." ".$data['student_lastname'],
-                    'user_login' => true
-                );
-                $this->session->set_userdata($userdata);
-                redirect(base_url('main'));
+            $type=$this->input->post('type');
+            if($type=="student"){            
+                $data=$this->Learning_model->authenticate($username,$password);
+                if($data){
+                    $userdata=array(
+                        'username' => $username,
+                        'student_id' => $data['student_id'],
+                        'fullname' => $data['student_firstname']." ".$data['student_lastname'],
+                        'user_login' => true
+                    );
+                    $this->session->set_userdata($userdata);
+                    redirect(base_url('main'));
+                }else{
+                    $this->session->set_flashdata('error','Invalid username and password!');
+                    redirect(base_url());
+                }
             }else{
-                $this->session->set_flashdata('error','Invalid username and password!');
-                redirect(base_url());
+                $data=$this->Learning_model->teacher_authenticate($username,$password);
+                if($data){
+                    $userdata=array(
+                        'username' => $username,
+                        'fullname' => $data['fullname'],
+                        'teacher_login' => true
+                    );
+                    $this->session->set_userdata($userdata);
+                    redirect(base_url('teachermain'));
+                }else{
+                    $this->session->set_flashdata('error','Invalid username and password!');
+                    redirect(base_url());
+                }
             }
         }
         public function logout(){
@@ -337,13 +354,13 @@ date_default_timezone_set('Asia/Manila');
                 redirect(base_url('teachermain'));
             }else{
                 $this->session->set_flashdata('error','Invalid username and password!');
-                redirect(base_url('teacher'));
+                redirect(base_url());
             }
         }
         public function teacherlogout(){
             $userdata=array('username','fullname','teacher_login');
             $this->session->unset_userdata($userdata);
-            redirect(base_url('teacher'));
+            redirect(base_url());
         }
          public function teachermain(){
             $page = "main";
@@ -351,7 +368,7 @@ date_default_timezone_set('Asia/Manila');
                 show_404();
             }                                     
             if($this->session->teacher_login){}
-            else{redirect(base_url('teacher'));}
+            else{redirect(base_url());}
             $data['students'] = $this->Learning_model->getAllRegisteredStudent();
             $data['lessons'] = $this->Learning_model->getAllLesson();
             $data['assignments'] = $this->Learning_model->getAllAssignment();
@@ -373,7 +390,7 @@ date_default_timezone_set('Asia/Manila');
                 show_404();
             }                                     
             if($this->session->teacher_login){}
-            else{redirect(base_url('teacher'));}
+            else{redirect(base_url());}
             $data['users'] = $this->Learning_model->getAllStudent();            
             $this->load->view('includes/header');
             $this->load->view('includes/teacher/navbar');
@@ -388,7 +405,7 @@ date_default_timezone_set('Asia/Manila');
                 show_404();
             }                                     
             if($this->session->teacher_login){}
-            else{redirect(base_url('teacher'));}
+            else{redirect(base_url());}
             $data['users'] = $this->Learning_model->getAllLesson();            
             $this->load->view('includes/header');
             $this->load->view('includes/teacher/navbar');
@@ -412,7 +429,7 @@ date_default_timezone_set('Asia/Manila');
                 show_404();
             }                                     
             if($this->session->teacher_login){}
-            else{redirect(base_url('teacher'));}
+            else{redirect(base_url());}
             $data['users'] = $this->Learning_model->getAllTask($id);  
             $data['lesson'] = $this->Learning_model->getSingleLesson($id);            
             $this->load->view('includes/header');
@@ -483,7 +500,7 @@ date_default_timezone_set('Asia/Manila');
                 show_404();
             }                                     
             if($this->session->teacher_login){}
-            else{redirect(base_url('teacher'));}
+            else{redirect(base_url());}
             $data['users'] = $this->Learning_model->getAllAssignmentByTask($id);  
             $data['topic'] = $this->Learning_model->getSingleTopic($id);
             $data['lesson'] = $this->Learning_model->getSingleLesson($lesson_id);            
@@ -551,7 +568,7 @@ date_default_timezone_set('Asia/Manila');
                 show_404();
             }                                     
             if($this->session->teacher_login){}
-            else{redirect(base_url('teacher'));}
+            else{redirect(base_url());}
             $data['users'] = $this->Learning_model->getAllQuizByTask($id);  
             $data['topic'] = $this->Learning_model->getSingleTopic($id);
             $data['lesson'] = $this->Learning_model->getSingleLesson($lesson_id);            
@@ -617,7 +634,7 @@ date_default_timezone_set('Asia/Manila');
                 show_404();
             }                                     
             if($this->session->teacher_login){}
-            else{redirect(base_url('teacher'));}
+            else{redirect(base_url());}
             $data['user'] = $this->Learning_model->getSingleStudent($student_id);
             $data['assignment'] = $this->Learning_model->getStudentAssignment($student_id);
             $data['quizzes'] = $this->Learning_model->getStudentQuiz($student_id);
