@@ -332,13 +332,14 @@ date_default_timezone_set('Asia/Manila');
 //====================================================================================================================================
         //===============================Teacher Module======================================
         public function teacher(){
-            $page = "index";
-            if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
-                show_404();
-            }                                     
-            if($this->session->teacher_login){redirect(base_url('main'));}
-            else{}
-            $this->load->view('pages/teacher/'.$page);                 
+            // $page = "index";
+            // if(!file_exists(APPPATH.'views/pages/teacher/'.$page.".php")){
+            //     show_404();
+            // }                                     
+            // if($this->session->teacher_login){redirect(base_url('main'));}
+            // else{}
+            // $this->load->view('pages/teacher/'.$page);                 
+            redirect(base_url());
         }
         public function teacher_authenticate(){
             $username=$this->input->post('username');
