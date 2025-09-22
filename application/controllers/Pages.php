@@ -33,7 +33,7 @@ date_default_timezone_set('Asia/Manila');
                     $this->session->set_flashdata('error','Invalid username and password!');
                     redirect(base_url());
                 }
-            }else{
+            }else if($type=="teacher"){
                 $data=$this->Learning_model->teacher_authenticate($username,$password);
                 if($data){
                     $userdata=array(
@@ -43,6 +43,20 @@ date_default_timezone_set('Asia/Manila');
                     );
                     $this->session->set_userdata($userdata);
                     redirect(base_url('teachermain'));
+                }else{
+                    $this->session->set_flashdata('error','Invalid username and password!');
+                    redirect(base_url());
+                }
+            }else{
+                $data=$this->Learning_model->admin_authenticate($username,$password);
+                if($data){
+                    $userdata=array(
+                        'username' => $username,
+                        'fullname' => $data['fullname'],
+                        'admin_login' => true
+                    );
+                    $this->session->set_userdata($userdata);
+                    redirect(base_url('adminmain'));
                 }else{
                     $this->session->set_flashdata('error','Invalid username and password!');
                     redirect(base_url());
@@ -699,7 +713,7 @@ date_default_timezone_set('Asia/Manila');
         public function adminlogout(){
             $userdata=array('username','fullname','admin_login');
             $this->session->unset_userdata($userdata);
-            redirect(base_url('admin'));
+            redirect(base_url());
         }
          public function adminmain(){
             $page = "main";

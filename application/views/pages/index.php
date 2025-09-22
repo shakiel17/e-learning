@@ -35,7 +35,8 @@
             <div class="signup">
              Login as:<br><br>
              &nbsp;&nbsp;&nbsp;<input type="radio" name="type" value="student" required> Student&nbsp;&nbsp;&nbsp;
-             <input type="radio" name="type" value="teacher" required> Teacher<br>
+             <input type="radio" name="type" value="teacher" required> Teacher&nbsp;&nbsp;&nbsp;
+             <input type="radio" name="type" value="admin" required> Admin<br>
           </div>          
           <div class="field space">
             <input type="submit" value="LOGIN">
