@@ -75,11 +75,11 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Student ID</label>
-                    <input type="text" class="form-control" id="stud_id" placeholder="Enter Lastname" name="student_id" required>
+                    <input type="text" class="form-control" id="stud_id" placeholder="Enter Student ID" name="student_id" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Last Name</label>
-                    <input type="text" class="form-control" id="stud_lastname" placeholder="Enter Student ID" name="lastname" required>
+                    <input type="text" class="form-control" id="stud_lastname" placeholder="Enter Lastname" name="lastname" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">First Name</label>
