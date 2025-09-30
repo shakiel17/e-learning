@@ -10,7 +10,11 @@ date_default_timezone_set('Asia/Manila');
             if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
                 show_404();
             }                                     
-            if($this->session->admin_login){redirect(base_url('main'));}
+            if($this->session->admin_login){
+                redirect(base_url('adminmain'));
+            }else if($this->session->user_login){
+                redirect(base_url('main'));
+            }else if($this->session->teacher_login){redirect(base_url('teachermain'));}
             else{}
             $this->load->view('pages/'.$page);                 
         }  
