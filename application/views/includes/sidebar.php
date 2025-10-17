@@ -15,6 +15,8 @@
                         <li><a class="ajax-link" href="<?=base_url('student_lesson');?>"><i class="glyphicon glyphicon-book"></i><span> Lessons</span></a>
                         </li>
                         <li><a class="ajax-link" href="<?=base_url('games_list');?>"><i class="glyphicon glyphicon-headphones"></i><span> Games</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="<?=base_url('crossword');?>"><i class="glyphicon glyphicon-inbox"></i><span> Crossword Puzzle</span></a>
                         </li>                        
                     </ul>                    
                 </div>

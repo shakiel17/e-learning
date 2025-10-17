@@ -346,6 +346,20 @@ date_default_timezone_set('Asia/Manila');
             }
             redirect(base_url('games_list'));
         }
+        public function crossword(){
+            $page = "crossword";
+            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+                show_404();
+            }                        
+            if($this->session->user_login){}
+            else{redirect(base_url());}            
+            $this->load->view('includes/header'); 
+            $this->load->view('includes/navbar');           
+            $this->load->view('includes/sidebar');            
+            $this->load->view('pages/'.$page);    
+            $this->load->view('includes/modal');     
+            $this->load->view('includes/footer');               
+        }
         //===============================User Module=========================================
 //====================================================================================================================================
         //===============================Teacher Module======================================

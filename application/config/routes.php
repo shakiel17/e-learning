@@ -98,6 +98,7 @@ $route['teachermain'] = 'pages/teachermain';
 $route['teacher_authenticate'] = 'pages/teacher_authenticate';
 $route['teacher'] = 'pages/teacher';
 //=====================User Route===========================
+$route['crossword'] = 'pages/crossword';
 $route['save_result/(:any)/(:any)/(:any)/(:any)'] = 'pages/save_result/$1/$2/$3/$4';
 $route['check_answer/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'pages/check_answer/$1/$2/$3/$4/$5';
 $route['submit_answer'] = 'pages/submit_answer';
