@@ -219,6 +219,16 @@
         document.getElementById('question_answer').value=id[7];
         document.getElementById('question_category').value=id[8];
     });
+    $('.topicVideo').click(function(){
+        var data=$(this).data('id');
+        var id=data.split('_');
+        document.getElementById('topic_video_id').value=id[0];        
+        document.getElementById('topic_video_lesson_id').value=id[1];
+    });
+    $('.viewVideo').click(function(){
+        var id=$(this).data('id');
+        document.getElementById('videoURL').innerHTML = id;
+    });
 </script>
 
 

@@ -39,6 +39,7 @@ if($this->session->flashdata('failed')){
                         <th>No.</th>                     
                         <th>Description</th>
                         <th>Attachment</th>
+                        <th>Videos</th>
                         <th>Assignment</th>
                         <th>Quizzes</th>
                         <th>Status</th>
@@ -73,11 +74,19 @@ if($this->session->flashdata('failed')){
                             }else{
                                 $view="<a href='".base_url('view_topic/'.$item['id'])."' class='btn btn-primary btn-sm' target='_blank'><i class='glyphicon glyphicon-search'></i></a>";
                                 $upload = "<a href='".base_url('remove_topic_attachment/'.$item['id']."/".$lesson['id'])."' class='btn btn-danger btn-sm'>Remove Attachment</a>";
-                            }                            
+                            }  
+                            if($item['videos']==""){
+                                $viewvid="";
+                                $uploadvid = "<a href='#' class='btn btn-info btn-sm topicVideo' data-toggle='modal' data-target='#ManageTopicVideo' data-id='$item[id]_$lesson[id]'>Add Video</a>";
+                            }else{
+                                $viewvid="<a href='#' class='btn btn-primary btn-sm viewVideo' data-toggle='modal' data-target='#ViewVideo' data-id='$item[videos]'><i class='glyphicon glyphicon-search'></i></a>";
+                                $uploadvid = "<a href='".base_url('remove_topic_video/'.$item['id']."/".$lesson['id'])."' class='btn btn-danger btn-sm'>Remove Video</a>";
+                            }                          
                             echo "<tr>";
                                 echo "<td>$x.</td>";
                                 echo "<td>$item[description]</td>";
                                 echo "<td>$upload $view</td>";
+                                echo "<td>$uploadvid $viewvid</td>";
                                  echo "<td align='center'><a href='".base_url('manage_assignment/'.$item['id']."/".$lesson['id'])."' class='btn btn-info btn-sm'>".count($assign)."</a></td>"; 
                                 echo "<td align='center'><a href='".base_url('manage_quiz/'.$item['id']."/".$lesson['id'])."' class='btn btn-info btn-sm'>".count($quiz)."</a></td>";
                                 echo "<td>$item[status]</td>";

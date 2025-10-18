@@ -68,6 +68,9 @@ $route['adminmain'] = 'pages/adminmain';
 $route['admin_authenticate'] = 'pages/admin_authenticate';
 $route['admin'] = 'pages/admin';
 //=====================Teacher Route========================
+$route['save_topic_video'] = 'pages/save_topic_video';
+$route['remove_topic_video/(:any)/(:any)'] = 'pages/remove_topic_video/$1/$2';
+$route['view_topic_vid/(:any)'] = 'pages/view_topic_vid/$1';
 $route['save_quiz_score'] = 'pages/save_quiz_score';
 $route['save_assignment_score'] = 'pages/save_assignment_score';
 $route['student_details/(:any)'] = 'pages/student_details/$1';

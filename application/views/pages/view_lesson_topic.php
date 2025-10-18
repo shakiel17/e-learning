@@ -64,6 +64,11 @@ if($this->session->flashdata('failed')){
                                 $view="";                                
                             }else{
                                 $view="<a href='".base_url('view_topic/'.$item['id'])."' class='btn btn-primary btn-sm' target='_blank'><i class='glyphicon glyphicon-search'></i> View</a>";
+                            } 
+                            if($item['videos']==""){
+                                $viewvid="";                                
+                            }else{
+                                $viewvid="<a href='#' class='btn btn-primary btn-sm viewVideo' data-toggle='modal' data-target='#ViewVideo' data-id='$item[videos]'><i class='glyphicon glyphicon-search'></i> View Video</a>";
                             }                            
                             echo "<tr>";
                                 echo "<td>$x.</td>";
@@ -72,7 +77,7 @@ if($this->session->flashdata('failed')){
                                 echo "<td align='center'><a href='".base_url('view_student_quiz/'.$item['id']."/".$lesson['id'])."' class='btn btn-info btn-sm'>".count($quiz)."</a></td>";                                
                                 ?>
                                 <td>
-                                    <?=$view;?>
+                                    <?=$view;?> <?=$viewvid;?>
                                 </td>
                                 <?php
                             echo "</tr>";

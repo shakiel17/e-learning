@@ -699,6 +699,25 @@ date_default_timezone_set('Asia/Manila');
             }
             redirect(base_url('student_details/'.$id));
         }
+        public function save_topic_video(){
+            $id=$this->input->post('lesson_id');
+            $save=$this->Learning_model->save_topic_video();
+            if($save){
+                $this->session->set_flashdata('success','Lesson video successfully added!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to add lesson video!');
+            }
+            redirect(base_url('manage_topics/'.$id));
+        }
+        public function remove_topic_video($id,$lesson_id){            
+            $save=$this->Learning_model->remove_topic_video($id);
+            if($save){
+                $this->session->set_flashdata('success','Video attachment successfully removed!');
+            }else{
+                $this->session->set_flashdata('failed','Unable to remove task video attachment!');
+            }
+            redirect(base_url('manage_topics/'.$lesson_id));
+        }
         //===============================Teacher Module======================================
 //====================================================================================================================================
     //===================================Admin Module========================================        

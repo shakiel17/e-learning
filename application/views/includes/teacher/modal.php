@@ -260,3 +260,45 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="ManageTopicVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" action="<?=base_url('save_topic_video');?>" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" id="topic_video_id">
+                <input type="hidden" name="lesson_id" id="topic_video_lesson_id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Manage Video</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Video URL</label>
+                    <input type="text" name="video" class="form-control">
+                </div>                                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ViewVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>View Video</h3>
+            </div>
+            <div class="modal-body">
+                <p id="videoURL"></p>                                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

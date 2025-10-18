@@ -209,6 +209,14 @@
                 return false;
             }
         }
+        public function remove_topic_video($id){
+            $result=$this->db->query("UPDATE lessons_details SET videos='' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
         public function update_topic_status($id,$status){
             $result=$this->db->query("UPDATE lessons_details SET `status`='$status' WHERE id='$id'");
             if($result){
@@ -594,6 +602,17 @@
         public function getAllGamesByIdChoice($id,$category){
             $result=$this->db->query("SELECT * FROM game_details WHERE category='$category' AND game_id='$id' ORDER BY RAND() LIMIT 1");
             return $result->row_array();
+        }
+        public function save_topic_video(){
+            $id=$this->input->post('id');
+            $lesson_id=$this->input->post('lesson_id');
+            $video=$this->input->post('video');
+                $result=$this->db->query("UPDATE lessons_details SET videos='$video' WHERE id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 ?>
